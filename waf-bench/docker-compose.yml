@@ -1,0 +1,18 @@
+version: '3'
+
+services:
+  modsecurity:
+    image: owasp/modsecurity-crs:nginx
+    ports:
+      - "8081:8080"
+    environment:
+      # Revert to host.docker.internal for better compatibility
+      # Ensure extra_hosts is set correctly below
+      - BACKEND=http://192.168.222.1:8000
+      - PARANOIA=1
+      - ANOMALY_INBOUND=10
+      - ANOMALY_OUTBOUND=5
+      - PROXY_CONNECT_TIMEOUT=60
+      - PROXY_READ_TIMEOUT=60
+      - PROXY_SEND_TIMEOUT=60
+

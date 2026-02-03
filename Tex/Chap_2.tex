@@ -1,0 +1,375 @@
+\chapter{相关技术}
+
+本章介绍与本文研究相关的关键技术基础，包括大语言模型、深度强化学习、Web应用防火墙、入侵与攻击模拟、生成式对抗样本以及智能验证方法。这些技术构成了基于LLM的BAS系统的理论支撑和技术基础。
+
+\section{大语言模型基础}
+
+大语言模型（Large Language Model, LLM）是基于深度神经网络架构的自然语言处理模型，通过在海量文本语料上进行预训练，学习语言的统计规律和语义知识，从而具备强大的文本理解与生成能力\cite{llm_survey_2023}。近年来，随着Transformer架构\cite{transformer_2017}和规模化训练技术的发展，LLM在代码生成、逻辑推理、任务规划等方面展现出超越传统方法的性能。
+
+\subsection{Transformer架构与自回归生成}
+
+现代LLM普遍采用Transformer架构作为核心，该架构基于自注意力机制（Self-Attention Mechanism）实现序列建模。给定输入序列 $\mathbf{x} = (x_1, x_2, \ldots, x_n)$，Transformer通过多层编码器或解码器，将输入映射到高维语义空间，捕获长距离依赖关系。
+
+在生成任务中，LLM采用自回归（Autoregressive）方式逐token生成输出序列。具体而言，模型在每个时间步 $t$ 根据已生成的前缀序列 $(y_1, \ldots, y_{t-1})$ 预测下一个token $y_t$ 的概率分布：
+\begin{equation}
+P(y_t | y_{1:t-1}, \mathbf{x}) = \text{softmax}(\mathbf{W}_o \cdot \mathbf{h}_t)
+\end{equation}
+其中，$\mathbf{h}_t$ 是第 $t$ 步的隐藏状态向量，$\mathbf{W}_o$ 是输出层权重矩阵。通过链式法则，整个序列的生成概率可表示为：
+\begin{equation}
+P(\mathbf{y} | \mathbf{x}) = \prod_{t=1}^{T} P(y_t | y_{1:t-1}, \mathbf{x})
+\end{equation}
+
+这种逐token生成的方式使得LLM能够灵活地生成任意长度的序列，且能够通过条件输入（如攻击类型、目标环境描述）实现可控生成，这为攻击载荷的动态生成提供了技术基础。
+
+\subsection{预训练与微调范式}
+
+LLM的训练通常分为预训练（Pre-training）和微调（Fine-tuning）两个阶段：
+
+\textbf{预训练阶段}：模型在大规模无标注文本语料（如网页、书籍、代码库）上进行自监督学习。常用的预训练目标包括：
+\begin{itemize}
+\item \textbf{因果语言建模（Causal Language Modeling, CLM）}：预测序列中下一个token，目标函数为：
+\begin{equation}
+\mathcal{L}_{\text{CLM}} = -\sum_{t=1}^{T} \log P(x_t | x_{1:t-1}; \theta)
+\end{equation}
+\item \textbf{掩码语言建模（Masked Language Modeling, MLM）}：随机掩盖序列中的部分token，训练模型预测被掩盖的内容，常用于双向编码器模型（如BERT）。
+\end{itemize}
+
+通过预训练，模型获得了对自然语言和代码语法的通用理解能力，能够处理多种下游任务。
+
+\textbf{微调阶段}：针对特定任务，使用标注数据对预训练模型进行有监督学习。在攻击载荷生成场景中，微调数据通常包括：
+\begin{itemize}
+\item 历史成功绕过的攻击样本
+\item 特定攻击类型的语法规则与变形模式
+\item 目标WAF的拦截日志与绕过策略
+\end{itemize}
+
+微调过程通常采用标准的交叉熵损失函数，并可引入正则化技术（如权重衰减、Dropout）防止过拟合。此外，近年来提出的参数高效微调方法（Parameter-Efficient Fine-Tuning, PEFT）如LoRA\cite{lora_2021}和Adapter\cite{adapter_2019}，能够在保持预训练权重不变的情况下，仅更新少量可训练参数，降低计算成本并保留模型的泛化能力。
+
+\subsection{采样与解码策略}
+
+生成式模型的输出质量与采样策略密切相关。给定模型预测的概率分布 $P(y_t | y_{1:t-1})$，常用的解码方法包括：
+
+\textbf{（1）贪心解码（Greedy Decoding）}：在每个时间步选择概率最高的token：
+\begin{equation}
+y_t = \arg\max_{v \in \mathcal{V}} P(v | y_{1:t-1})
+\end{equation}
+该方法简单高效，但容易陷入重复生成或局部最优。
+
+\textbf{（2）束搜索（Beam Search）}：维护 $k$ 个候选序列（束宽），在每步扩展所有候选并保留总概率最高的 $k$ 个。该方法能够探索更广的搜索空间，但计算成本较高，且对于开放式生成任务可能导致过于保守的输出。
+
+\textbf{（3）温度采样（Temperature Sampling）}：引入温度参数 $\tau$ 调节概率分布的平滑度：
+\begin{equation}
+P_{\tau}(y_t | y_{1:t-1}) = \frac{\exp(z_t / \tau)}{\sum_{v \in \mathcal{V}} \exp(z_v / \tau)}
+\end{equation}
+其中，$z_t$ 是模型输出的logit值。较高的温度增加随机性，有利于生成多样化样本；较低的温度使分布更尖锐，趋向于确定性输出。
+
+\textbf{（4）Top-k与Top-p采样}：Top-k采样仅从概率最高的 $k$ 个token中采样，而Top-p（Nucleus Sampling）\cite{nucleus_2019}则动态选择累积概率超过阈值 $p$ 的token集合，兼顾了多样性与合理性。
+
+在攻击载荷生成中，需要在"探索新变体"（多样性）和"保持有效性"（语法正确性）之间取得平衡。实践中常采用温度采样结合Top-p策略，并通过强化学习进一步优化生成分布。
+
+\subsection{提示工程与上下文学习}
+
+大语言模型具备强大的上下文学习（In-Context Learning, ICL）能力，即通过精心设计的提示词（Prompt）和少量示例（Few-shot Examples），无需梯度更新即可完成特定任务\cite{gpt3_2020}。在BAS场景中，提示工程可用于：
+\begin{itemize}
+\item 指定攻击类型与目标（如"生成一个绕过ModSecurity的SQL注入payload"）
+\item 提供示例攻击样本作为上下文参考
+\item 引导模型进行变形策略分析（如"分析该WAF规则的弱点并生成绕过方案"）
+\end{itemize}
+
+然而，仅依赖提示工程的生成效果受限于模型的预训练知识，对于需要与特定WAF深度交互和自适应学习的场景，仍需结合微调和强化学习技术。
+
+\section{深度强化学习基础}
+
+深度强化学习（Deep Reinforcement Learning, DRL）是机器学习的一个重要分支，通过智能体（Agent）与环境（Environment）的交互试错，学习最优决策策略以最大化长期累积奖励\cite{drl_survey_2019}。相比于监督学习依赖标注数据，强化学习能够在仅有稀疏奖励信号的情况下进行自主探索，这使其特别适合于攻击载荷生成等难以获取大量有效标注的场景。
+
+\subsection{马尔可夫决策过程}
+
+强化学习问题通常建模为马尔可夫决策过程（Markov Decision Process, MDP），定义为五元组 $\langle \mathcal{S}, \mathcal{A}, P, R, \gamma \rangle$：
+\begin{itemize}
+\item $\mathcal{S}$：状态空间，表示环境的所有可能状态
+\item $\mathcal{A}$：动作空间，表示智能体可采取的所有动作
+\item $P: \mathcal{S} \times \mathcal{A} \times \mathcal{S} \to [0, 1]$：状态转移概率函数，$P(s'|s,a)$ 表示在状态 $s$ 执行动作 $a$ 后转移到状态 $s'$ 的概率
+\item $R: \mathcal{S} \times \mathcal{A} \to \mathbb{R}$：奖励函数，给出在状态 $s$ 执行动作 $a$ 后获得的即时奖励
+\item $\gamma \in [0, 1]$：折扣因子，用于平衡即时奖励与长期奖励
+\end{itemize}
+
+智能体的目标是学习一个策略 $\pi: \mathcal{S} \to \mathcal{A}$（或概率策略 $\pi(a|s)$），最大化期望累积奖励：
+\begin{equation}
+J(\pi) = \mathbb{E}_{\tau \sim \pi} \left[ \sum_{t=0}^{T} \gamma^t R(s_t, a_t) \right]
+\end{equation}
+其中，$\tau = (s_0, a_0, r_0, s_1, a_1, r_1, \ldots)$ 是轨迹（Trajectory）。
+
+在攻击载荷生成场景中，MDP各要素的映射为：
+\begin{itemize}
+\item \textbf{状态}：已生成的token序列或其嵌入表示
+\item \textbf{动作}：选择下一个token或变异操作
+\item \textbf{奖励}：基于WAF反馈（绕过/拦截）和验证结果（有效/无效）计算得出
+\item \textbf{状态转移}：由生成模型的自回归过程决定
+\end{itemize}
+
+\subsection{价值函数与策略优化}
+
+强化学习的核心是估计状态价值函数和动作价值函数：
+\begin{itemize}
+\item \textbf{状态价值函数}（State-Value Function）：
+\begin{equation}
+V^\pi(s) = \mathbb{E}_{\pi} \left[ \sum_{t=0}^{\infty} \gamma^t R(s_t, a_t) \mid s_0 = s \right]
+\end{equation}
+表示从状态 $s$ 开始，遵循策略 $\pi$ 能够获得的期望累积奖励。
+
+\item \textbf{动作价值函数}（Action-Value Function）：
+\begin{equation}
+Q^\pi(s, a) = \mathbb{E}_{\pi} \left[ \sum_{t=0}^{\infty} \gamma^t R(s_t, a_t) \mid s_0 = s, a_0 = a \right]
+\end{equation}
+表示在状态 $s$ 执行动作 $a$ 后，继续遵循策略 $\pi$ 的期望累积奖励。
+\end{itemize}
+
+策略优化方法可分为两大类：
+
+\textbf{（1）基于价值的方法}（Value-Based Methods）：如Q-Learning、DQN\cite{dqn_2015}，通过学习Q函数近似最优策略：
+\begin{equation}
+\pi^*(s) = \arg\max_a Q^*(s, a)
+\end{equation}
+
+\textbf{（2）基于策略的方法}（Policy-Based Methods）：直接优化参数化策略 $\pi_\theta$。策略梯度（Policy Gradient）定理\cite{policy_gradient_2000}给出了梯度计算公式：
+\begin{equation}
+\nabla_\theta J(\pi_\theta) = \mathbb{E}_{\tau \sim \pi_\theta} \left[ \sum_{t=0}^{T} \nabla_\theta \log \pi_\theta(a_t | s_t) \cdot A^\pi(s_t, a_t) \right]
+\end{equation}
+其中，$A^\pi(s, a) = Q^\pi(s, a) - V^\pi(s)$ 是优势函数（Advantage Function），用于降低方差。
+
+Actor-Critic方法结合了两者优势，使用Critic网络估计价值函数，Actor网络根据Critic的指导更新策略。
+
+\subsection{近端策略优化（PPO）}
+
+Proximal Policy Optimization（PPO）\cite{ppo_2017}是目前最常用的策略优化算法之一，其核心思想是限制策略更新幅度，避免训练不稳定。PPO引入剪切目标函数：
+\begin{equation}
+L^{\text{CLIP}}(\theta) = \mathbb{E}_t \left[ \min \left( r_t(\theta) \hat{A}_t, \text{clip}(r_t(\theta), 1-\epsilon, 1+\epsilon) \hat{A}_t \right) \right]
+\end{equation}
+其中，$r_t(\theta) = \frac{\pi_\theta(a_t | s_t)}{\pi_{\theta_{\text{old}}}(a_t | s_t)}$ 是概率比（Probability Ratio），$\epsilon$ 是剪切阈值（通常取0.1-0.2），$\hat{A}_t$ 是优势估计。
+
+剪切机制确保了新策略不会偏离旧策略太远，从而在提升样本效率的同时保持训练稳定性。PPO因其简单高效且对超参数不敏感，被广泛应用于语言模型的强化学习微调（如RLHF\cite{rlhf_2022}）。
+
+\subsection{KL散度约束与奖励建模}
+
+在将强化学习应用于语言生成任务时，常面临两个关键挑战：
+
+\textbf{（1）模式坍塌（Mode Collapse）}：策略优化过程中，模型可能过度利用某些高奖励样本，导致生成多样性下降。为缓解该问题，通常引入KL散度惩罚项：
+\begin{equation}
+J_{\text{RL}}(\theta) = \mathbb{E}_{x \sim p_{\text{data}}, y \sim \pi_\theta(\cdot|x)} \left[ R(x, y) \right] - \beta \cdot D_{\text{KL}}(\pi_\theta \| \pi_{\text{ref}})
+\end{equation}
+其中，$\pi_{\text{ref}}$ 是参考策略（通常为监督微调后的模型），$\beta$ 是约束强度。KL散度项限制了策略不会偏离参考策略过远，保持生成质量与合理性。
+
+\textbf{（2）奖励稀疏性（Sparse Reward）}：在攻击场景中，只有成功绕过WAF才能获得正向奖励，导致信号稀疏、训练困难。奖励建模（Reward Modeling）通过训练一个辅助模型预测样本的价值，提供更密集的中间奖励：
+\begin{equation}
+R_{\text{total}}(x, y) = R_{\text{env}}(x, y) + \alpha \cdot R_{\text{model}}(x, y)
+\end{equation}
+奖励模型可基于历史成功样本与失败样本训练，学习区分高价值与低价值的生成策略。
+
+\section{Web应用防火墙（WAF）技术}
+
+Web应用防火墙（Web Application Firewall, WAF）是部署在Web应用前端的安全设备或服务，用于检测和阻断恶意HTTP/HTTPS请求，保护后端应用免受SQL注入、XSS、命令注入、路径遍历等攻击\cite{waf_survey_2022}。WAF的核心功能包括请求过滤、威胁检测、日志记录和流量管理。
+
+\subsection{WAF检测机制}
+
+现代WAF通常采用多层检测机制，结合规则引擎、语义分析和机器学习：
+
+\textbf{（1）基于签名的检测}：维护已知攻击模式的规则库，使用正则表达式或字符串匹配识别恶意特征。例如，针对SQL注入的规则可能包括：
+\begin{itemize}
+\item 检测SQL关键字（如 \texttt{UNION}, \texttt{SELECT}, \texttt{DROP}）
+\item 识别注释符号（如 \texttt{--}, \texttt{/**/}, \texttt{\#}）
+\item 匹配特殊字符组合（如 \texttt{' OR '1'='1}）
+\end{itemize}
+
+这种方法对已知攻击有较高检出率，但存在以下局限：
+\begin{itemize}
+\item 易被编码绕过（如URL编码、Unicode编码、十六进制表示）
+\item 对变形攻击敏感性差（如利用等价语法替换）
+\item 规则维护成本高，且滞后于新型攻击手段
+\end{itemize}
+
+\textbf{（2）基于语义的检测}：通过解析请求中的SQL语句、JavaScript代码等，分析其语法结构和执行语义。例如，SQL解析器可识别是否存在非预期的SQL操作符或子查询。该方法能够检测到某些绕过技巧，但实现复杂度高，且可能因解析器差异导致误判。
+
+\textbf{（3）基于机器学习的检测}：将HTTP请求特征（如URL长度、参数数量、字符频率、N-gram统计）输入分类模型（如随机森林、SVM、深度神经网络），判断请求是否为攻击\cite{ml_waf_2020}。机器学习WAF的优势在于：
+\begin{itemize}
+\item 能够学习复杂的特征组合
+\item 对未知攻击变体有一定泛化能力
+\item 可通过在线学习持续更新
+\end{itemize}
+
+然而，机器学习模型也引入了新的脆弱性，即对抗样本攻击。攻击者可通过微调输入特征，使恶意请求被误分类为良性请求，这正是本文研究的核心问题之一。
+
+\subsection{常见开源WAF}
+
+目前主流的开源WAF包括：
+
+\textbf{（1）ModSecurity}：Apache基金会支持的开源WAF，支持灵活的规则配置和多种部署模式（如反向代理、嵌入式模块）。其核心规则集OWASP Core Rule Set（CRS）\cite{owasp_crs}涵盖了常见Web攻击类型，并持续更新以应对新威胁。
+
+\textbf{（2）Naxsi}：基于Nginx的轻量级WAF，采用白名单策略和评分机制。其检测逻辑相对简单，性能开销较低，适合高并发场景。
+
+\textbf{（3）Shadow Daemon}：支持多种Web服务器的模块化WAF，通过数据流分析和异常检测识别攻击。
+
+这些开源WAF为BAS系统的测试与评估提供了可控的实验环境。
+
+\subsection{WAF绕过技术}
+
+攻击者常用的WAF绕过技术包括：
+\begin{itemize}
+\item \textbf{编码混淆}：使用URL编码、Unicode编码、HTML实体编码等规避规则匹配
+\item \textbf{大小写变换}：利用SQL不区分大小写的特性（如 \texttt{SeLeCt}）
+\item \textbf{注释插入}：在关键字中插入注释符（如 \texttt{SEL/**/ECT}）
+\item \textbf{等价替换}：使用语义等价的语法结构（如 \texttt{UNION} 替换为 \texttt{UNION ALL}）
+\item \textbf{协议滥用}：利用HTTP协议特性（如分块传输、多字段提交）绕过检测
+\end{itemize}
+
+这些技巧构成了传统Payload字典的基础，而基于LLM的生成方法能够自动组合和创新这些变形策略。
+
+\section{入侵与攻击模拟（BAS）技术}
+
+入侵与攻击模拟（Breach and Attack Simulation, BAS）是一种自动化安全验证技术，通过持续模拟真实攻击场景，评估企业防御体系的有效性\cite{bas_platform_2024}。BAS与传统渗透测试的主要区别在于其自动化、持续性和规模化特征。
+
+\subsection{BAS系统架构}
+
+典型的BAS系统包含以下核心模块：
+
+\textbf{（1）攻击场景库}：预定义的攻击剧本（Playbooks），描述攻击的战术、技术和程序（TTPs）。常见的场景包括：
+\begin{itemize}
+\item 初始访问（Initial Access）：如钓鱼邮件、漏洞利用
+\item 权限提升（Privilege Escalation）：如本地提权、容器逃逸
+\item 横向移动（Lateral Movement）：如凭证窃取、内网扫描
+\item 数据渗出（Data Exfiltration）：如DNS隧道、HTTP隐蔽信道
+\end{itemize}
+
+\textbf{（2）攻击执行引擎}：负责解释攻击剧本并生成具体的攻击流量。传统BAS系统通常采用预定义的Payload模板，而本文研究的智能BAS系统则利用LLM动态生成载荷。
+
+\textbf{（3）监控与验证模块}：实时监控攻击执行过程，捕获目标系统的响应，判断攻击是否成功。验证机制包括：
+\begin{itemize}
+\item 响应码分析（如检测到500错误可能表明SQL注入成功）
+\item 响应内容匹配（如页面回显数据库信息）
+\item 行为监控（如检测到Shell回连、文件修改）
+\end{itemize}
+
+\textbf{（4）结果评估与报告}：汇总测试结果，生成安全态势报告，标识防御薄弱点并提供修复建议。
+
+\subsection{BAS的价值与局限}
+
+BAS的核心价值在于：
+\begin{itemize}
+\item \textbf{持续验证}：可按需或定期执行，持续评估防御有效性
+\item \textbf{成本优势}：自动化执行降低了人工渗透测试的成本
+\item \textbf{全面覆盖}：能够覆盖大量攻击场景，避免遗漏
+\item \textbf{量化风险}：提供可量化的安全指标，辅助决策
+\end{itemize}
+
+然而，传统BAS系统也存在明显局限：
+\begin{itemize}
+\item \textbf{依赖静态剧本}：攻击手段固定，难以应对快速演进的防御技术
+\item \textbf{缺乏适应性}：无法根据目标环境动态调整策略
+\item \textbf{验证不足}：仅依赖简单的响应判断，易产生误报
+\end{itemize}
+
+本文研究通过引入LLM和强化学习，旨在突破这些局限。
+
+\section{生成式对抗样本技术}
+
+对抗样本（Adversarial Examples）最初在计算机视觉领域被发现，指的是通过微小扰动导致模型误分类的输入\cite{adversarial_2014}。在网络安全领域，对抗样本生成技术被应用于测试WAF、IDS等检测系统的鲁棒性。
+
+\subsection{对抗样本的定义与目标}
+
+在WAF场景中，对抗样本是指同时满足以下条件的攻击载荷 $x'$：
+\begin{itemize}
+\item \textbf{功能等价性}：$x'$ 与原始攻击载荷 $x$ 在目标系统上具有相同的攻击效果（如触发SQL注入漏洞）
+\item \textbf{绕过能力}：$x'$ 能够通过WAF的检测，即 $f_{\text{WAF}}(x') = \text{benign}$，而 $f_{\text{WAF}}(x) = \text{malicious}$
+\item \textbf{可用性}：$x'$ 符合目标语言的语法规范，不会因格式错误而被拒绝
+\end{itemize}
+
+形式化地，对抗样本生成问题可表述为约束优化：
+\begin{equation}
+\begin{aligned}
+\max_{x'} \quad & P_{\text{WAF}}(x' \text{ is benign}) \\
+\text{s.t.} \quad & \text{Effect}(x') = \text{Effect}(x) \\
+& \text{Valid}(x') = \text{True} \\
+& d(x, x') \leq \delta
+\end{aligned}
+\end{equation}
+其中，$d(\cdot, \cdot)$ 是距离度量（如编辑距离），$\delta$ 是扰动预算。
+
+\subsection{基于搜索的生成方法}
+
+早期的对抗样本生成方法主要基于启发式搜索：
+
+\textbf{（1）遗传算法（Genetic Algorithm, GA）}：将Payload编码为染色体，通过选择、交叉和变异操作演化种群，适应度函数由WAF绕过成功率定义。WAF-A-MoLE\cite{waf_a_mole}即采用该方法。
+
+\textbf{（2）爬山算法（Hill Climbing）}：从初始Payload出发，迭代应用变异操作，保留能够降低WAF检测置信度的变体。
+
+\textbf{（3）模拟退火（Simulated Annealing）}：在爬山算法基础上引入概率性接受劣解，避免陷入局部最优。
+
+这些方法的优势在于实现简单、无需训练数据，但存在搜索效率低、难以处理高维空间等问题。
+
+\subsection{基于学习的生成方法}
+
+近年来，研究者将机器学习技术应用于对抗样本生成：
+
+\textbf{（1）基于序列到序列模型的生成}：使用Seq2Seq模型学习从原始Payload到绕过变体的映射\cite{seq2seq_waf}。训练数据通常由人工标注的变形样本对构成。
+
+\textbf{（2）基于生成对抗网络的生成}：生成器网络生成Payload，判别器网络模拟WAF的检测逻辑，两者对抗训练\cite{gan_waf}。
+
+\textbf{（3）基于强化学习的生成}：将生成过程建模为MDP，通过与真实WAF交互学习最优变异策略。该方法无需大量标注数据，能够适应黑盒环境。
+
+\textbf{（4）基于LLM的生成}：利用预训练语言模型的语义理解能力，通过提示工程或微调生成高质量载荷。结合强化学习，可进一步优化生成策略以适应特定WAF。
+
+\section{智能验证技术}
+
+在BAS系统中，验证环节用于确认生成的攻击载荷是否真正触发了漏洞。仅依赖WAF的放行/拦截结果可能导致误判，因为：
+\begin{itemize}
+\item WAF放行并不意味着攻击成功（可能Payload无效）
+\item WAF拦截也可能误判（False Positive）
+\end{itemize}
+
+因此，需要引入更可信的验证机制\cite{verification_2024}。
+
+\subsection{基于响应分析的验证}
+
+通过对比正常请求与攻击请求的响应差异，判断攻击是否生效：
+
+\textbf{（1）响应码验证}：某些攻击会导致异常响应码，如：
+\begin{itemize}
+\item SQL注入可能触发500内部错误
+\item 路径遍历可能返回403禁止访问
+\end{itemize}
+
+\textbf{（2）响应内容验证}：检查响应体中是否包含敏感信息，如：
+\begin{itemize}
+\item 数据库错误信息（如 \texttt{MySQL syntax error}）
+\item 系统路径泄露（如 \texttt{/etc/passwd}）
+\item 数据库查询结果（如用户表记录）
+\end{itemize}
+
+\textbf{（3）响应时间验证}：针对时间盲注攻击，通过测量响应时间判断Payload是否触发延迟。
+
+这些方法实现简单，但准确性受限于响应特征的明显程度。
+
+\subsection{基于浏览器执行的验证}
+
+对于XSS等需要客户端执行的攻击，单纯分析HTTP响应不足以验证有效性。基于无头浏览器（Headless Browser）的验证方法\cite{browser_verification}通过模拟真实浏览器环境，监控以下行为：
+
+\textbf{（1）DOM变化监测}：检测是否插入了恶意脚本节点或修改了页面结构。
+
+\textbf{（2）JavaScript执行监控}：通过浏览器API（如Chrome DevTools Protocol）捕获脚本执行事件，验证是否触发了预期的恶意操作（如弹窗、Cookie窃取）。
+
+\textbf{（3）网络流量监控}：检测是否有异常的外联请求（如向攻击者服务器发送数据）。
+
+该方法显著降低了误报率，但计算开销较大，需权衡验证准确性与执行效率。
+
+\subsection{基于LLM的语义验证}
+
+LLM可作为智能裁判，对攻击结果进行语义层面的验证。具体而言，将攻击上下文、目标响应和预期效果输入LLM，由模型判断攻击是否成功。例如：
+\begin{itemize}
+\item 输入："目标：获取数据库版本；响应：MySQL 5.7.32"
+\item 输出："攻击成功，已获取数据库版本信息"
+\end{itemize}
+
+这种方法的优势在于能够处理复杂的上下文关系，但需注意LLM的幻觉问题，必要时应结合规则验证。
+
+\section{本章小结}
+
+本章系统介绍了与本文研究相关的核心技术，包括大语言模型的架构原理、训练范式和生成策略，深度强化学习的理论基础、策略优化算法和KL约束机制，Web应用防火墙的检测机制与绕过技术，入侵与攻击模拟系统的架构与价值，生成式对抗样本的定义与生成方法，以及智能验证技术的多种实现途径。这些技术为后续章节的系统设计、实现与实验评估提供了坚实的理论支撑和技术基础。

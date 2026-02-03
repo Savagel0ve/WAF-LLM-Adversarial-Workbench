@@ -1,0 +1,23 @@
+{
+  "sqli": {
+    "attack_type": "sqli",
+    "total": 512000,
+    "train": 409600,
+    "val": 51200,
+    "test": 51200
+  },
+  "xss": {
+    "attack_type": "xss",
+    "total": 512000,
+    "train": 409600,
+    "val": 51200,
+    "test": 51200
+  },
+  "rce": {
+    "attack_type": "rce",
+    "total": 37302,
+    "train": 29841,
+    "val": 3730,
+    "test": 3731
+  }
+}

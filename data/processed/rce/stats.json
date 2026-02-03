@@ -1,0 +1,7 @@
+{
+  "attack_type": "rce",
+  "total": 37302,
+  "train": 29841,
+  "val": 3730,
+  "test": 3731
+}

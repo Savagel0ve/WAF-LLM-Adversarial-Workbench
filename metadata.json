@@ -1,0 +1,5 @@
+{
+  "name": "Copy of WAF-LLM Adversarial Workbench",
+  "description": "A research dashboard and simulation environment for a Master's Thesis on LLM-empowered WAF evasion. It visualizes the comparison between traditional SAC (Soft Actor-Critic) methods and novel LLM-based strategies.",
+  "requestFramePermissions": []
+}

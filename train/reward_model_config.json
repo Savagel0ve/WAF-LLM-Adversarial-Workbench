@@ -1,0 +1,60 @@
+{
+  "comment": "奖励模型训练配置 - 基于 GPTFuzzer 论文",
+  
+  "data_generation": {
+    "sqli": {
+      "num_samples": 4000,
+      "comment": "论文设定: SQLi 使用 4000 条"
+    },
+    "xss": {
+      "num_samples": 2000,
+      "comment": "论文设定: XSS 使用 2000 条"
+    },
+    "rce": {
+      "num_samples": 2000,
+      "comment": "论文设定: RCE 使用 2000 条"
+    },
+    "balance_ratio": 0.5,
+    "rate_limit": 0.1,
+    "comment_balance": "正样本比例 0.5 = 1:1 平衡",
+    "comment_rate": "请求间隔 0.1 秒，避免过载"
+  },
+  
+  "training": {
+    "max_length": 128,
+    "batch_size": 32,
+    "learning_rate": 2e-5,
+    "epochs": 4,
+    "warmup_ratio": 0.1,
+    "weight_decay": 0.01,
+    "comment": "论文设定的标准超参数"
+  },
+  
+  "optimization": {
+    "fp16": true,
+    "early_stopping_patience": 2,
+    "gradient_accumulation_steps": 1,
+    "comment": "RTX 4070 优化: 使用 FP16 节省显存"
+  },
+  
+  "evaluation": {
+    "metrics": ["accuracy", "f1", "precision", "recall", "auc"],
+    "target_auc_sqli": 0.99,
+    "target_auc_xss": 0.98,
+    "comment": "论文目标: SQLi AUC>99%, XSS AUC>98%"
+  },
+  
+  "waf": {
+    "default_url": "http://localhost:8081",
+    "timeout": 10,
+    "max_retries": 3,
+    "comment": "WAF 连接配置"
+  },
+  
+  "paths": {
+    "data_dir": "./data",
+    "models_dir": "./models",
+    "logs_dir": "./logs",
+    "comment": "默认路径配置"
+  }
+}
