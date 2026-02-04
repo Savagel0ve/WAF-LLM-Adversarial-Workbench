@@ -6,6 +6,9 @@
 
 set -e  # 遇到错误立即退出
 
+# 防止 git 冲突：标记脚本已运行
+touch ~/.gptfuzzer_initialized 2>/dev/null || true
+
 # ==================== 配置参数 ====================
 CONDA_ENV_NAME="gptfuzzer"
 PYTHON_VERSION="3.10"
