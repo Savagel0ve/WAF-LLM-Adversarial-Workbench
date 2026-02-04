@@ -38,11 +38,11 @@ MODEL_PRESETS = {
     },
     "qwen2.5-coder-3b-server": {
         "model_name": "Qwen/Qwen2.5-Coder-3B",
-        "max_length": 512,   # 增加序列长度
-        "batch_size": 12,    # RTX 4090 3B 模型适配 24GB
-        "gradient_accumulation": 8,  # 等效 batch=96
+        "max_length": 256,   # 减小序列长度节省显存
+        "batch_size": 8,     # RTX 4090 3B 模型适配 24GB
+        "gradient_accumulation": 12, # 等效 batch=96
         "use_flash_attention": True,  # RTX 4090 完美支持
-        "gradient_checkpointing": False,
+        "gradient_checkpointing": True,  # 启用梯度检查点节省显存
     },
     # RTX 4090 专属 - 7B 模型也可以跑
     "qwen2.5-coder-7b-server": {

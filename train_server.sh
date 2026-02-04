@@ -13,14 +13,14 @@ touch ~/.gptfuzzer_initialized 2>/dev/null || true
 CONDA_ENV_NAME="gptfuzzer"
 PYTHON_VERSION="3.10"
 ATTACK_TYPE="sqli"
-MODEL_PRESET="qwen2.5-coder-3b-server"   # RTX 4090 24GB 优化 (无量化，全精度)
+MODEL_PRESET="qwen2.5-coder-1.5b-server"  # RTX 4090 24GB 推荐 (更快，更稳定)
 PRETRAIN_EPOCHS=3
 REWARD_SAMPLES=4000
 RL_EPISODES=20
 
-# RTX 4090 24GB 优化参数
-BATCH_SIZE=12       # 3B 模型适配 24GB
-GRADIENT_ACCUMULATION=8
+# RTX 4090 24GB 优化参数 (1.5B 模型)
+BATCH_SIZE=24       # 1.5B 可以用大 batch
+GRADIENT_ACCUMULATION=4
 MAX_LENGTH=512      # 更长序列
 DATALOADER_WORKERS=8
 
