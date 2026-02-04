@@ -118,11 +118,16 @@ def setup_model_and_tokenizer(model_name: str, gpu_config: GPUConfig, model_conf
     else:
         torch_dtype = torch.float32
     
-    # 加载模型
+    # 加载模型 - 显式指定 CUDA 设备
+    device = "cuda" if torch.cuda.is_available() else "cpu"
     model_kwargs = {
         "trust_remote_code": model_config.trust_remote_code,
-        "device_map": "auto",
     }
+    
+    # 只有在使用量化时才用 device_map="auto"
+    if gpu_config.load_in_4bit or gpu_config.load_in_8bit:
+        model_kwargs["device_map"] = "auto"
+    # 否则不设置 device_map，让 Trainer 处理设备分配
     
     if quantization_config:
         model_kwargs["quantization_config"] = quantization_config
@@ -152,6 +157,11 @@ def setup_model_and_tokenizer(model_name: str, gpu_config: GPUConfig, model_conf
             model = AutoModelForCausalLM.from_pretrained(model_name, **model_kwargs)
         else:
             raise
+    
+    # 显式移动模型到 GPU（如果没有使用 device_map）
+    if "device_map" not in model_kwargs and torch.cuda.is_available():
+        model = model.to(device)
+        print(f"   设备: {device}")
     
     # 调整 pad token id
     if model.config.pad_token_id is None:
@@ -185,6 +195,7 @@ def train(args):
         gradient_accumulation = args.gradient_accumulation or preset.get("gradient_accumulation", 8)
         use_flash_attention = preset.get("use_flash_attention", True)
         load_in_4bit = preset.get("load_in_4bit", False)
+        gradient_checkpointing = preset.get("gradient_checkpointing", False) or args.gradient_checkpointing
     else:
         model_name = args.model_name
         max_length = args.max_length or 256
@@ -192,6 +203,7 @@ def train(args):
         gradient_accumulation = args.gradient_accumulation or 8
         use_flash_attention = args.flash_attention
         load_in_4bit = args.load_in_4bit
+        gradient_checkpointing = args.gradient_checkpointing
     
     # 创建配置
     model_config = ModelConfig(
@@ -205,7 +217,7 @@ def train(args):
         use_bf16=args.bf16,
         use_flash_attention=use_flash_attention,
         load_in_4bit=load_in_4bit,
-        gradient_checkpointing=args.gradient_checkpointing,
+        gradient_checkpointing=gradient_checkpointing,
     )
     
     train_config = TrainingConfig(
@@ -237,6 +249,7 @@ def train(args):
     print(f"精度: {'BF16' if args.bf16 else 'FP16'}")
     print(f"4-bit量化: {load_in_4bit}")
     print(f"Flash Attention: {use_flash_attention}")
+    print(f"梯度检查点: {gradient_checkpointing}")
     print(f"优化器: {args.optim}")
     print("="*60)
     
@@ -258,6 +271,19 @@ def train(args):
     
     # 设置模型和tokenizer
     model, tokenizer = setup_model_and_tokenizer(model_name, gpu_config, model_config)
+    
+    # 验证模型在 GPU 上
+    if torch.cuda.is_available():
+        # 检查模型参数所在设备
+        param_device = next(model.parameters()).device
+        print(f"   模型设备: {param_device}")
+        if param_device.type != "cuda":
+            print("   ⚠️ 模型不在 GPU 上，正在移动...")
+            model = model.cuda()
+            print(f"   模型已移动到: {next(model.parameters()).device}")
+        
+        # 显示当前 GPU 内存使用
+        print(f"   GPU 内存使用: {torch.cuda.memory_allocated() / 1024**3:.2f} GB")
     
     # 启用 gradient checkpointing (节省显存)
     if gpu_config.gradient_checkpointing:

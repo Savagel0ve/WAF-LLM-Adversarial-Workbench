@@ -5,7 +5,7 @@
 
 param(
     [string]$AttackType = "sqli",
-    [string]$ModelPreset = "qwen2.5-coder-1.5b",
+    [string]$ModelPreset = "qwen2.5-coder-0.5b",  # 改为 0.5B 模型，适合 8GB 显存
     [int]$PretrainEpochs = 3,
     [int]$RewardSamples = 4000,
     [int]$RLEpisodes = 20,

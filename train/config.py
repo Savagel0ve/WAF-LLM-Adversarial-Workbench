@@ -12,17 +12,35 @@ MODEL_PRESETS = {
     # Qwen2.5-Coder 系列 (推荐)
     "qwen2.5-coder-0.5b": {
         "model_name": "Qwen/Qwen2.5-Coder-0.5B",
-        "max_length": 512,
-        "batch_size": 8,
-        "gradient_accumulation": 4,
+        "max_length": 128,  # 减小序列长度
+        "batch_size": 16,   # 安全的 batch size
+        "gradient_accumulation": 2,  # 等效 batch=32
         "use_flash_attention": False,
     },
     "qwen2.5-coder-1.5b": {
         "model_name": "Qwen/Qwen2.5-Coder-1.5B",
         "max_length": 256,
-        "batch_size": 4,
+        "batch_size": 4,    # 默认小 batch (8GB 显存)
         "gradient_accumulation": 8,
-        "use_flash_attention": False,  # Flash Attention requires separate install
+        "use_flash_attention": False,
+        "gradient_checkpointing": True,
+    },
+    # RTX 5090 32GB 优化配置
+    "qwen2.5-coder-1.5b-server": {
+        "model_name": "Qwen/Qwen2.5-Coder-1.5B",
+        "max_length": 256,
+        "batch_size": 32,   # 大 batch (32GB 显存)
+        "gradient_accumulation": 4,  # 等效 batch=128
+        "use_flash_attention": True,
+        "gradient_checkpointing": False,
+    },
+    "qwen2.5-coder-3b-server": {
+        "model_name": "Qwen/Qwen2.5-Coder-3B",
+        "max_length": 256,
+        "batch_size": 16,
+        "gradient_accumulation": 8,
+        "use_flash_attention": True,
+        "gradient_checkpointing": False,
     },
     "qwen2.5-coder-3b": {
         "model_name": "Qwen/Qwen2.5-Coder-3B",
@@ -182,8 +200,9 @@ class TrainingConfig:
     load_best_model_at_end: bool = True
     metric_for_best_model: str = "eval_loss"
     
-    # 数据加载
-    dataloader_num_workers: int = 4
+    # 数据加载 - 根据系统自动调整
+    # Windows: 2, Linux 服务器: 8
+    dataloader_num_workers: int = 8 if os.name != 'nt' else 2
     dataloader_pin_memory: bool = True
     
     # 混合精度 - 优先使用 bf16
