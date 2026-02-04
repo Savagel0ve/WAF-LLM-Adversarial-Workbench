@@ -307,7 +307,6 @@ def train(args):
     # 训练参数
     training_args = TrainingArguments(
         output_dir=train_config.output_dir,
-        overwrite_output_dir=True,
         
         num_train_epochs=train_config.num_train_epochs,
         per_device_train_batch_size=train_config.per_device_train_batch_size,
