@@ -325,7 +325,7 @@ if [ -d "$REWARD_MODEL_PATH" ]; then
             --pretrained_model_path $PRETRAIN_DIR \
             --data_path $LABELED_DATA_DIR \
             --output_dir $REWARD_DIR \
-            --batch_size 32 \
+            --batch_size 8 \
             --epochs 4 \
             --bf16
         
@@ -365,7 +365,7 @@ else
         --pretrained_model_path $PRETRAIN_DIR \
         --data_path $LABELED_DATA_DIR \
         --output_dir $REWARD_DIR \
-        --batch_size 32 \
+        --batch_size 8 \
         --epochs 4 \
         --bf16
     
@@ -385,8 +385,8 @@ python train/train_rl.py \
     --pretrained_model $PRETRAIN_DIR \
     --reward_model $REWARD_MODEL_PATH \
     --output_dir $RL_DIR \
-    --batch_size 256 \
-    --mini_batch_size 16 \
+    --batch_size 64 \
+    --mini_batch_size 4 \
     --total_episodes $RL_EPISODES \
     --bf16
 
