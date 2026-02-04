@@ -104,15 +104,11 @@ print_success "安装 PyTorch (CUDA 12.4)..."
 pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu124
 
 # 安装编译依赖
-print_success "安装编译依赖..."
+print_success "安装基础工具..."
 pip install psutil ninja packaging wheel setuptools
 
-# 安装 Flash Attention 2 (RTX 5090 支持)
-print_success "安装 Flash Attention 2..."
-# 尝试安装预编译版本
-pip install flash-attn==2.5.8 --no-build-isolation 2>/dev/null || \
-pip install flash-attn --no-build-isolation 2>/dev/null || \
-print_warning "Flash Attention 安装失败，将使用默认注意力机制（不影响训练）"
+# 跳过 Flash Attention（编译复杂且不是必须的）
+print_warning "跳过 Flash Attention 安装（RTX 5090 32GB 显存充足，不需要）"
 
 # 安装训练依赖
 print_success "安装训练依赖..."
@@ -140,22 +136,9 @@ print_success "依赖安装完成"
 # 验证 CUDA
 python -c "import torch; print(f'PyTorch: {torch.__version__}'); print(f'CUDA: {torch.cuda.is_available()}'); print(f'GPU: {torch.cuda.get_device_name(0) if torch.cuda.is_available() else \"N/A\"}')"
 
-# 检查 Flash Attention 是否可用
-FLASH_ATTN_AVAILABLE=$(python -c "
-try:
-    import flash_attn
-    print('yes')
-except ImportError:
-    print('no')
-" 2>/dev/null)
-
-if [ "$FLASH_ATTN_AVAILABLE" = "yes" ]; then
-    print_success "Flash Attention 2: 已安装"
-    USE_FLASH_ATTN="--flash-attention"
-else
-    print_warning "Flash Attention 2: 未安装，使用默认注意力机制"
-    USE_FLASH_ATTN=""
-fi
+# 不使用 Flash Attention（RTX 5090 32GB 不需要）
+USE_FLASH_ATTN=""
+print_success "使用默认注意力机制（显存充足）"
 
 # ==================== 配置训练参数 (RTX 5090 32GB 优化) ====================
 print_header "配置训练参数 (RTX 5090 32GB 优化)"
