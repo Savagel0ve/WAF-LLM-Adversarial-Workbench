@@ -360,12 +360,32 @@ def train(args):
         processing_class=tokenizer,
     )
     
+    # 检测 checkpoint 并恢复
+    resume_from_checkpoint = None
+    if args.resume:
+        checkpoint_dir = Path(train_config.output_dir)
+        checkpoints = list(checkpoint_dir.glob("checkpoint-*"))
+        if checkpoints:
+            # 找到最新的 checkpoint（按步数排序）
+            def get_step(ckpt):
+                try:
+                    return int(ckpt.name.split("-")[1])
+                except (IndexError, ValueError):
+                    return 0
+            latest_checkpoint = max(checkpoints, key=get_step)
+            resume_from_checkpoint = str(latest_checkpoint)
+            print(f"\n🔄 检测到 checkpoint: {latest_checkpoint.name}")
+            print(f"   将从 step {get_step(latest_checkpoint)} 恢复训练")
+    
     # 开始训练
     print("\n" + "="*60)
-    print("🏃 开始训练...")
+    if resume_from_checkpoint:
+        print(f"🏃 从 checkpoint 恢复训练...")
+    else:
+        print("🏃 开始训练...")
     print("="*60)
     
-    train_result = trainer.train()
+    train_result = trainer.train(resume_from_checkpoint=resume_from_checkpoint)
     
     # 保存模型
     print("\n💾 保存最终模型...")
@@ -475,10 +495,21 @@ def main():
     log_group.add_argument("--eval-steps", type=int, default=500,
                           help="评估步数")
     
+    # 断点续训
+    resume_group = parser.add_argument_group("断点续训")
+    resume_group.add_argument("--resume", action="store_true", default=True,
+                             help="自动从最新 checkpoint 恢复训练 (默认开启)")
+    resume_group.add_argument("--no-resume", action="store_true",
+                             help="禁用自动恢复，从头开始训练")
+    
     # 其他
     parser.add_argument("--seed", type=int, default=42, help="随机种子")
     
     args = parser.parse_args()
+    
+    # 处理 resume 参数
+    if args.no_resume:
+        args.resume = False
     
     # 处理 bf16 参数
     if args.no_bf16:
