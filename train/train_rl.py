@@ -486,7 +486,7 @@ class RLTrainer:
                     outputs = self.model.generate(
                         input_ids,
                         attention_mask=attention_mask,
-                        max_length=self.config.max_new_tokens,
+                        max_new_tokens=self.config.max_new_tokens,
                         temperature=self.config.temperature,
                         top_k=self.config.top_k,
                         top_p=self.config.top_p,

@@ -30,11 +30,11 @@ MODEL_PRESETS = {
     # RTX 4090 24GB 优化配置
     "qwen2.5-coder-1.5b-server": {
         "model_name": "Qwen/Qwen2.5-Coder-1.5B",
-        "max_length": 512,   # 增加序列长度 (24GB 充足)
-        "batch_size": 24,    # RTX 4090 大 batch (24GB 显存)
-        "gradient_accumulation": 4,  # 等效 batch=96
+        "max_length": 256,   # 减小序列长度
+        "batch_size": 16,    # RTX 4090 适配 24GB
+        "gradient_accumulation": 6,  # 等效 batch=96
         "use_flash_attention": True,  # RTX 4090 完美支持
-        "gradient_checkpointing": False,
+        "gradient_checkpointing": True,  # 启用梯度检查点节省显存
     },
     "qwen2.5-coder-3b-server": {
         "model_name": "Qwen/Qwen2.5-Coder-3B",
