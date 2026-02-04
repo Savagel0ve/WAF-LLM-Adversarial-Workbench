@@ -1,5 +1,7 @@
 """
-训练配置文件 - 针对RTX 4070 8GB优化
+训练配置文件 - 支持多种 GPU 配置
+- 本地: RTX 4070 8GB
+- 服务器: RTX 4090D 24GB
 支持 Qwen2.5-Coder 和其他现代 LLM
 """
 import os
@@ -25,22 +27,31 @@ MODEL_PRESETS = {
         "use_flash_attention": False,
         "gradient_checkpointing": True,
     },
-    # RTX 5090 32GB 优化配置
+    # RTX 4090 24GB 优化配置
     "qwen2.5-coder-1.5b-server": {
         "model_name": "Qwen/Qwen2.5-Coder-1.5B",
-        "max_length": 256,
-        "batch_size": 32,   # 大 batch (32GB 显存)
-        "gradient_accumulation": 4,  # 等效 batch=128
-        "use_flash_attention": True,
+        "max_length": 512,   # 增加序列长度 (24GB 充足)
+        "batch_size": 24,    # RTX 4090 大 batch (24GB 显存)
+        "gradient_accumulation": 4,  # 等效 batch=96
+        "use_flash_attention": True,  # RTX 4090 完美支持
         "gradient_checkpointing": False,
     },
     "qwen2.5-coder-3b-server": {
         "model_name": "Qwen/Qwen2.5-Coder-3B",
-        "max_length": 256,
-        "batch_size": 16,
-        "gradient_accumulation": 8,
-        "use_flash_attention": True,
+        "max_length": 512,   # 增加序列长度
+        "batch_size": 12,    # RTX 4090 3B 模型适配 24GB
+        "gradient_accumulation": 8,  # 等效 batch=96
+        "use_flash_attention": True,  # RTX 4090 完美支持
         "gradient_checkpointing": False,
+    },
+    # RTX 4090 专属 - 7B 模型也可以跑
+    "qwen2.5-coder-7b-server": {
+        "model_name": "Qwen/Qwen2.5-Coder-7B",
+        "max_length": 256,
+        "batch_size": 4,
+        "gradient_accumulation": 16,  # 等效 batch=64
+        "use_flash_attention": True,
+        "gradient_checkpointing": True,  # 7B 需要梯度检查点
     },
     "qwen2.5-coder-3b": {
         "model_name": "Qwen/Qwen2.5-Coder-3B",

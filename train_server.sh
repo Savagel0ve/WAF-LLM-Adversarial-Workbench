@@ -1,7 +1,7 @@
 #!/bin/bash
 # ============================================================
 # GPTFuzzer 一键训练脚本 - Ubuntu 服务器版
-# 针对 RTX 5090 32GB 优化
+# 针对 RTX 4090 24GB 优化 (Ada Lovelace SM 89)
 # ============================================================
 
 set -e  # 遇到错误立即退出
@@ -13,15 +13,15 @@ touch ~/.gptfuzzer_initialized 2>/dev/null || true
 CONDA_ENV_NAME="gptfuzzer"
 PYTHON_VERSION="3.10"
 ATTACK_TYPE="sqli"
-MODEL_PRESET="qwen2.5-coder-1.5b"  # RTX 5090 32GB 可以跑 1.5B
+MODEL_PRESET="qwen2.5-coder-3b"   # RTX 4090 24GB 可以跑 3B
 PRETRAIN_EPOCHS=3
 REWARD_SAMPLES=4000
 RL_EPISODES=20
 
-# RTX 5090 32GB 优化参数
-BATCH_SIZE=32
-GRADIENT_ACCUMULATION=4
-MAX_LENGTH=256
+# RTX 4090 24GB 优化参数
+BATCH_SIZE=12       # 3B 模型适配 24GB
+GRADIENT_ACCUMULATION=8
+MAX_LENGTH=512      # 更长序列
 DATALOADER_WORKERS=8
 
 # 颜色输出
@@ -102,17 +102,17 @@ print_header "安装 Python 依赖"
 # 升级 pip
 pip install --upgrade pip
 
-# 安装 PyTorch Nightly (RTX 5090 需要最新版本支持 Blackwell 架构)
-print_success "安装 PyTorch Nightly (支持 RTX 5090 Blackwell 架构)..."
-pip uninstall torch torchvision torchaudio -y 2>/dev/null || true
-pip install --pre torch torchvision torchaudio --index-url https://download.pytorch.org/whl/nightly/cu126
+# 安装 PyTorch (CUDA 12.4 - RTX 4090 完全支持)
+print_success "安装 PyTorch (CUDA 12.4 - RTX 4090 24GB)..."
+pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu124
 
 # 安装编译依赖
 print_success "安装基础工具..."
 pip install psutil ninja packaging wheel setuptools
 
-# 跳过 Flash Attention（编译复杂且不是必须的）
-print_warning "跳过 Flash Attention 安装（RTX 5090 32GB 显存充足，不需要）"
+# 安装 Flash Attention (RTX 4090 完美支持 Ada Lovelace 架构)
+print_success "安装 Flash Attention 2..."
+pip install flash-attn --no-build-isolation 2>/dev/null || print_warning "Flash Attention 安装失败，将使用默认注意力机制"
 
 # 安装训练依赖
 print_success "安装训练依赖..."
@@ -140,62 +140,68 @@ print_success "依赖安装完成"
 # 验证 CUDA
 python -c "import torch; print(f'PyTorch: {torch.__version__}'); print(f'CUDA: {torch.cuda.is_available()}'); print(f'GPU: {torch.cuda.get_device_name(0) if torch.cuda.is_available() else \"N/A\"}')"
 
-# 不使用 Flash Attention（RTX 5090 32GB 不需要）
-USE_FLASH_ATTN=""
-print_success "使用默认注意力机制（显存充足）"
+# 检测 Flash Attention 是否可用
+if python -c "import flash_attn" 2>/dev/null; then
+    USE_FLASH_ATTN="--use-flash-attention"
+    print_success "Flash Attention 2 已启用 (加速约 2x)"
+else
+    USE_FLASH_ATTN=""
+    print_warning "Flash Attention 不可用，使用标准注意力"
+fi
 
-# ==================== 配置训练参数 (RTX 5090 32GB 优化) ====================
-print_header "配置训练参数 (RTX 5090 32GB 优化)"
+# ==================== 配置训练参数 (RTX 4090 24GB 优化) ====================
+print_header "配置训练参数 (RTX 4090 24GB 优化)"
 
 # 创建服务器优化配置
 cat > train/config_server.py << 'EOF'
 """
-服务器训练配置 - RTX 5090 32GB 优化
+服务器训练配置 - RTX 4090 24GB 优化
+Ada Lovelace 架构 (SM 89) - 完美支持 Flash Attention 2
 """
 import os
 from dataclasses import dataclass, field
 from typing import Optional, List
 
-# RTX 5090 32GB 优化预设
+# RTX 4090 24GB 优化预设
 MODEL_PRESETS_SERVER = {
     "qwen2.5-coder-1.5b": {
         "model_name": "Qwen/Qwen2.5-Coder-1.5B",
-        "max_length": 256,
-        "batch_size": 32,  # RTX 5090 可以用更大 batch
-        "gradient_accumulation": 4,  # 等效 batch=128
-        "use_flash_attention": True,  # 启用 Flash Attention
+        "max_length": 512,   # 24GB 可用更长序列
+        "batch_size": 24,    # RTX 4090 优化
+        "gradient_accumulation": 4,  # 等效 batch=96
+        "use_flash_attention": True,  # 4090 完美支持
     },
     "qwen2.5-coder-3b": {
         "model_name": "Qwen/Qwen2.5-Coder-3B",
-        "max_length": 256,
-        "batch_size": 16,
-        "gradient_accumulation": 8,
+        "max_length": 512,
+        "batch_size": 12,    # 3B 模型适配 24GB
+        "gradient_accumulation": 8,  # 等效 batch=96
         "use_flash_attention": True,
     },
     "qwen2.5-coder-7b": {
         "model_name": "Qwen/Qwen2.5-Coder-7B",
         "max_length": 256,
         "batch_size": 4,
-        "gradient_accumulation": 32,
+        "gradient_accumulation": 16,  # 等效 batch=64
         "use_flash_attention": True,
-        "load_in_4bit": True,  # 7B 需要量化
+        "gradient_checkpointing": True,  # 7B 需要梯度检查点
     },
 }
 
 @dataclass
 class ServerTrainingConfig:
-    """服务器训练配置"""
+    """服务器训练配置 - RTX 4090 24GB"""
     output_dir: str = "models/pretrain_sqli_qwen"
     num_train_epochs: int = 3
-    per_device_train_batch_size: int = 32
-    per_device_eval_batch_size: int = 32
-    gradient_accumulation_steps: int = 4
+    per_device_train_batch_size: int = 12  # 3B 模型默认
+    per_device_eval_batch_size: int = 12
+    gradient_accumulation_steps: int = 8   # 等效 batch=96
     
     learning_rate: float = 2e-5
     weight_decay: float = 0.01
     warmup_ratio: float = 0.1
     
-    bf16: bool = True
+    bf16: bool = True   # RTX 4090 支持 BF16
     fp16: bool = False
     
     dataloader_num_workers: int = 8  # 服务器可以用更多 workers
@@ -212,7 +218,7 @@ class ServerTrainingConfig:
 
 EOF
 
-print_success "服务器配置已创建"
+print_success "服务器配置已创建 (RTX 4090 24GB)"
 
 # ==================== 设置 HuggingFace 镜像 ====================
 print_header "配置 HuggingFace 镜像"
