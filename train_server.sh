@@ -102,9 +102,10 @@ print_header "安装 Python 依赖"
 # 升级 pip
 pip install --upgrade pip
 
-# 安装 PyTorch (CUDA 12.4 for RTX 5090)
-print_success "安装 PyTorch (CUDA 12.4)..."
-pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu124
+# 安装 PyTorch Nightly (RTX 5090 需要最新版本支持 Blackwell 架构)
+print_success "安装 PyTorch Nightly (支持 RTX 5090 Blackwell 架构)..."
+pip uninstall torch torchvision torchaudio -y 2>/dev/null || true
+pip install --pre torch torchvision torchaudio --index-url https://download.pytorch.org/whl/nightly/cu126
 
 # 安装编译依赖
 print_success "安装基础工具..."
