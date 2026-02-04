@@ -210,16 +210,15 @@ EOF
 
 print_success "服务器配置已创建"
 
-# ==================== 设置 HuggingFace 镜像 (可选) ====================
-print_header "配置 HuggingFace"
+# ==================== 设置 HuggingFace 镜像 ====================
+print_header "配置 HuggingFace 镜像"
 
-read -p "是否使用 HuggingFace 镜像加速下载? (y/N): " -n 1 -r
-echo
-if [[ $REPLY =~ ^[Yy]$ ]]; then
-    export HF_ENDPOINT="https://hf-mirror.com"
+# 默认启用镜像（国内服务器必须）
+export HF_ENDPOINT="https://hf-mirror.com"
+if ! grep -q "HF_ENDPOINT" ~/.bashrc 2>/dev/null; then
     echo 'export HF_ENDPOINT="https://hf-mirror.com"' >> ~/.bashrc
-    print_success "已设置 HuggingFace 镜像: $HF_ENDPOINT"
 fi
+print_success "已设置 HuggingFace 镜像: $HF_ENDPOINT"
 
 # ==================== 开始训练 ====================
 print_header "开始训练流程"
